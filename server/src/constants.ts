@@ -1,0 +1,12 @@
+import { getPropertyValue } from '~/utils'
+
+export const SLACK_INCOMING_API = getPropertyValue('SLACK_INCOMING_API')
+export const SPREADSHEET_NAME = getPropertyValue('SPREADSHEET_NAME')
+export const positiveCSV =
+  'https://www.mhlw.go.jp/content/pcr_positive_daily.csv'
+export const testedCSV = 'https://www.mhlw.go.jp/content/pcr_tested_daily.csv'
+export const caseTotalCSV = 'https://www.mhlw.go.jp/content/cases_total.csv'
+export const recoveryTotalCSV =
+  'https://www.mhlw.go.jp/content/recovery_total.csv'
+export const deathTotalCSV = 'https://www.mhlw.go.jp/content/death_total.csv'
+export const severeTotalCSV = 'https://www.mhlw.go.jp/content/severe_daily.csv'

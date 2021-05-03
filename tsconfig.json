@@ -17,21 +17,23 @@
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        "./*"
+        "./client/*"
       ],
       "@/*": [
-        "./*"
+        "./client/*"
       ]
     },
     "types": [
       "@types/node",
       "@types/jest",
-      "@nuxt/types"
+      "@nuxt/types",
+      "@nuxt/http"
     ]
   },
   "exclude": [
     "node_modules",
     ".nuxt",
-    "dist"
+    "dist",
+    "server"
   ]
 }

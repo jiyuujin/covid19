@@ -1,4 +1,11 @@
+const sass = require('sass')
+const fiber = require('fibers')
+
+require('dotenv').config()
+
 export default {
+  srcDir: 'client',
+
   head: {
     title: 'top',
     meta: [
@@ -9,13 +16,43 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  css: [],
+  css: [
+    {
+      src: '~/assets/main.scss',
+      lang: 'css'
+    }
+  ],
 
   components: true,
 
+  plugins: ['~/plugins/repositories'],
+
   buildModules: ['@nuxt/typescript-build'],
 
-  modules: ['@nuxtjs/pwa'],
+  modules: ['@nuxt/http', '@nuxtjs/pwa'],
 
-  build: {}
+  build: {
+    babel: {
+      plugins: [
+        [
+          '@babel/plugin-proposal-private-methods',
+          {
+            loose: true
+          }
+        ]
+      ]
+    },
+    loaders: {
+      scss: {
+        implementation: sass,
+        sassOptions: {
+          fiber
+        }
+      }
+    }
+  },
+
+  env: {
+    NUXT_COVID19_API: process.env.NUXT_COVID19_API
+  }
 }

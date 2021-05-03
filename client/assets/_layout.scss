@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 12px 0;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+}
+
+.grid_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.info {
+  position: relative;
+  width: 450px;
+  height: 300px;
+}
+
+.chart {
+  width: 50%;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0;
+  }
+
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .chart {
+    width: 100%;
+  }
+}
