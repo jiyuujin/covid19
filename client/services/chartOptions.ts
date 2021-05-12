@@ -80,6 +80,41 @@ export const testedChartOptions = {
   }
 }
 
+export const vaccinationChartOptions = {
+  title: 'ワクチン接種数累計',
+  titleTextStyle: {
+    color: textColor
+  },
+  explorer: {
+    axis: 'horizontal',
+    keepInBounds: true,
+    actions: ['dragToPan']
+  },
+  colors: chartColors,
+  backgroundColor: backgroundColor,
+  legend: {
+    textStyle: {
+      color: textColor
+    }
+  },
+  series: {
+    0: { targetAxisIndex: 0, type: 'bars' }
+  },
+  vAxes: {
+    0: {
+      title: 'ワクチン接種数累計',
+      minValue: 0,
+      titleTextStyle: {
+        color: textColor
+      },
+      textColor: textColor
+    }
+  },
+  hAxis: {
+    textColor: textColor
+  }
+}
+
 export const caseChartOptions = {
   title: '入院治療を要する者',
   titleTextStyle: {

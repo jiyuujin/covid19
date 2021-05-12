@@ -14,6 +14,15 @@
         新型コロナウイルス感染症について オープンデータ (厚生労働省)
       </a>
     </h3>
+    <h3>
+      <a
+        href="https://www.kantei.go.jp/jp/headline/kansensho/vaccine.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        これまでのワクチン総接種回数 (首相官邸)
+      </a>
+    </h3>
 
     <h2>データ</h2>
     <h3>検査陽性者数</h3>
@@ -42,6 +51,23 @@
             :chart-options="testedTotalOptions"
             class="chart"
           />
+        </div>
+      </div>
+    </div>
+
+    <h3>ワクチン接種数累計</h3>
+    <div class="grid">
+      <div class="grid_list">
+        <div class="info">
+          <div class="info">
+            <google-chart
+              v-if="vaccinationTotalData.length !== 0"
+              chart-type="ColumnChart"
+              :chart-data="vaccinationTotalData"
+              :chart-options="vaccinationOptions"
+              class="chart"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -114,6 +140,7 @@ import Vue from 'vue'
 import {
   positiveChartOptions,
   testedChartOptions,
+  vaccinationChartOptions,
   caseChartOptions,
   recoveryChartOptions,
   deathChartOptions,
@@ -122,6 +149,7 @@ import {
 import {
   positiveChartColumns,
   testedChartColumns,
+  vaccinationChartColumns,
   caseChartColumns,
   recoveryChartColumns,
   deathChartColumns,
@@ -138,6 +166,7 @@ export default Vue.extend({
     return {
       positiveTotalData: [] as Array<Array<Date | string | number>>,
       testedTotalData: [] as Array<Array<Date | string | number>>,
+      vaccinationTotalData: [] as Array<Array<Date | string | number>>,
       caseTotalData: [] as Array<Array<Date | string | number>>,
       recoveryTotalData: [] as Array<Array<Date | string | number>>,
       deathTotalData: [] as Array<Array<Date | string | number>>,
@@ -145,6 +174,7 @@ export default Vue.extend({
       updatedAt: '' as string,
       positiveTotalOptions: positiveChartOptions,
       testedTotalOptions: testedChartOptions,
+      vaccinationOptions: vaccinationChartOptions,
       caseTotalOptions: caseChartOptions,
       recoveryTotalOptions: recoveryChartOptions,
       deathTotalOptions: deathChartOptions,
@@ -158,6 +188,9 @@ export default Vue.extend({
         console.log(res)
         this.positiveTotalData = [...this.getItems(res, positiveChartColumns)]
         this.testedTotalData = [...this.getItems(res, testedChartColumns)]
+        this.vaccinationTotalData = [
+          ...this.getItems(res, vaccinationChartColumns)
+        ]
         this.caseTotalData = [...this.getItems(res, caseChartColumns)]
         this.recoveryTotalData = [...this.getItems(res, recoveryChartColumns)]
         this.deathTotalData = [...this.getItems(res, deathChartColumns)]
