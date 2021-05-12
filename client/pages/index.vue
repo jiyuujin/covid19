@@ -4,6 +4,17 @@
       {{ `${updatedAt} 更新` }}
     </div>
 
+    <h2>参照</h2>
+    <h3>
+      <a
+        href="https://www.mhlw.go.jp/stf/covid-19/open-data.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        新型コロナウイルス感染症について オープンデータ (厚生労働省)
+      </a>
+    </h3>
+
     <h2>データ</h2>
     <h3>検査陽性者数</h3>
     <div class="grid">
