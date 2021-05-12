@@ -1,10 +1,11 @@
 <template>
-  <main class="main">
+  <main>
     <div v-if="updatedAt" class="header">
       {{ `${updatedAt} 更新` }}
     </div>
 
     <div class="grid">
+      <h2>{{ `受け止める` }}</h2>
       <div class="grid_list">
         <div class="info">
           <google-chart
@@ -24,21 +25,27 @@
             class="chart"
           />
         </div>
-        <div class="info">
-          <google-chart
-            v-if="caseTotalData.length !== 0"
-            chart-type="ColumnChart"
-            :chart-data="caseTotalData"
-            :chart-options="caseTotalOptions"
-            class="chart"
-          />
-        </div>
+      </div>
+      <h2>{{ `前を向く` }}</h2>
+      <div class="grid_list">
         <div class="info">
           <google-chart
             v-if="recoveryTotalData.length !== 0"
             chart-type="ColumnChart"
             :chart-data="recoveryTotalData"
             :chart-options="recoveryTotalOptions"
+            class="chart"
+          />
+        </div>
+      </div>
+      <h2>{{ `その他` }}</h2>
+      <div class="grid_list">
+        <div class="info">
+          <google-chart
+            v-if="caseTotalData.length !== 0"
+            chart-type="ColumnChart"
+            :chart-data="caseTotalData"
+            :chart-options="caseTotalOptions"
             class="chart"
           />
         </div>
