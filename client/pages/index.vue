@@ -4,8 +4,9 @@
       {{ `${updatedAt} 更新` }}
     </div>
 
+    <h2>データ</h2>
+    <h3>検査陽性者数</h3>
     <div class="grid">
-      <h2>{{ `受け止める` }}</h2>
       <div class="grid_list">
         <div class="info">
           <google-chart
@@ -16,6 +17,12 @@
             class="chart"
           />
         </div>
+      </div>
+    </div>
+
+    <h3>検査実施件数</h3>
+    <div class="grid">
+      <div class="grid_list">
         <div class="info">
           <google-chart
             v-if="testedTotalData.length !== 0"
@@ -26,7 +33,10 @@
           />
         </div>
       </div>
-      <h2>{{ `前を向く` }}</h2>
+    </div>
+
+    <h3>退院、療養解除となった者</h3>
+    <div class="grid">
       <div class="grid_list">
         <div class="info">
           <google-chart
@@ -38,7 +48,10 @@
           />
         </div>
       </div>
-      <h2>{{ `その他` }}</h2>
+    </div>
+
+    <h3>入院治療を要する者</h3>
+    <div class="grid">
       <div class="grid_list">
         <div class="info">
           <google-chart
@@ -49,6 +62,12 @@
             class="chart"
           />
         </div>
+      </div>
+    </div>
+
+    <h3>死亡者数</h3>
+    <div class="grid">
+      <div class="grid_list">
         <div class="info">
           <google-chart
             v-if="deathTotalData.length !== 0"
@@ -58,6 +77,12 @@
             class="chart"
           />
         </div>
+      </div>
+    </div>
+
+    <h3>重傷者数</h3>
+    <div class="grid">
+      <div class="grid_list">
         <div class="info">
           <google-chart
             v-if="severeTotalData.length !== 0"
