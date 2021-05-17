@@ -25,7 +25,9 @@
     </h3>
 
     <h2>データ</h2>
-    <h3>検査陽性者数</h3>
+    <h3 id="positiveTotal" class="subtitle">
+      <a href="/#positiveTotal">{{ `検査陽性者数` }}</a>
+    </h3>
     <div class="grid">
       <div class="grid_list">
         <div class="info">
@@ -40,7 +42,9 @@
       </div>
     </div>
 
-    <h3>検査実施件数</h3>
+    <h3 id="testedTotal" class="subtitle">
+      <a href="/#testedTotal">{{ `検査実施件数` }}</a>
+    </h3>
     <div class="grid">
       <div class="grid_list">
         <div class="info">
@@ -55,7 +59,9 @@
       </div>
     </div>
 
-    <h3>ワクチン接種数累計</h3>
+    <h3 id="vaccinationTotal" class="subtitle">
+      <a href="/#vaccinationTotal">{{ `ワクチン接種数累計` }}</a>
+    </h3>
     <div class="grid">
       <div class="grid_list">
         <div class="info">
@@ -72,7 +78,9 @@
       </div>
     </div>
 
-    <h3>退院、療養解除となった者</h3>
+    <h3 id="recoveryTotal" class="subtitle">
+      <a href="/#recoveryTotal">{{ `退院、療養解除となった者` }}</a>
+    </h3>
     <div class="grid">
       <div class="grid_list">
         <div class="info">
@@ -87,7 +95,9 @@
       </div>
     </div>
 
-    <h3>入院治療を要する者</h3>
+    <h3 id="caseTotal" class="subtitle">
+      <a href="/#caseTotal">{{ `入院治療を要する者` }}</a>
+    </h3>
     <div class="grid">
       <div class="grid_list">
         <div class="info">
@@ -102,7 +112,9 @@
       </div>
     </div>
 
-    <h3>死亡者数</h3>
+    <h3 id="deathTotal" class="subtitle">
+      <a href="/#deathTotal">{{ `死亡者数` }}</a>
+    </h3>
     <div class="grid">
       <div class="grid_list">
         <div class="info">
@@ -117,7 +129,9 @@
       </div>
     </div>
 
-    <h3>重傷者数</h3>
+    <h3 id="severeTotal" class="subtitle">
+      <a href="/#severeTotal">{{ `重傷者数` }}</a>
+    </h3>
     <div class="grid">
       <div class="grid_list">
         <div class="info">

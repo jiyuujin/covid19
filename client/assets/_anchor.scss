@@ -1,0 +1,22 @@
+.subtitle {
+  a {
+    color: #000;
+    text-decoration: none;
+
+    &:visited {
+      color: #000;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .subtitle {
+    a {
+      color: #fff;
+
+      &:visited {
+        color: #fff;
+      }
+    }
+  }
+}
