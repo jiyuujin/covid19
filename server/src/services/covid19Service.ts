@@ -22,9 +22,8 @@ export class Covid19Service {
    * PCR検査 陽性者数を取得する
    */
   static fetchPCRPositiveDaily() {
-    const code: string = 'Shift_JIS'
     const res = ApiService.getApi(positiveCSV)
-    const resData = res.getContentText(code)
+    const resData = res.getContentText()
     const items = convertCsv(resData)
 
     try {
