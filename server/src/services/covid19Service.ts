@@ -47,12 +47,25 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      for (let index = 0; index < items.length; index++) {
-        const textFinder = sheet.createTextFinder(items[index][0])
-        const ranges = textFinder.findAll()
-        if (ranges[0] != null) {
-          const target = ranges[0].getA1Notation().slice(1)
-          sheet.getRange(Number(target), 3).setValue(items[index][1])
+      for (let index = 0; index < 30; index++) {
+        const startDate = sheet.getRange(1 + index, 1).getValue()
+        if (
+          new Date(startDate).getFullYear() ===
+            new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 ===
+            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getDate() === new Date(items[1][0]).getDate()
+        ) {
+          const mapItems = items.map((item, key) => {
+            if (key === 0) {
+              return [null]
+            }
+            return [item[1]]
+          })
+          sheet
+            .getRange(1 + index - 1, 3, mapItems.length, mapItems[0].length)
+            .setValues(mapItems)
+          break
         }
       }
     } catch (err) {
@@ -74,12 +87,25 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      for (let index = 0; index < items.length; index++) {
-        const textFinder = sheet.createTextFinder(items[index][0])
-        const ranges = textFinder.findAll()
-        if (ranges[0] != null) {
-          const target = ranges[0].getA1Notation().slice(1)
-          sheet.getRange(Number(target), 4).setValue(items[index][1])
+      for (let index = 0; index < 30; index++) {
+        const startDate = sheet.getRange(1 + index, 1).getValue()
+        if (
+          new Date(startDate).getFullYear() ===
+            new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 ===
+            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getDate() === new Date(items[1][0]).getDate()
+        ) {
+          const mapItems = items.map((item, key) => {
+            if (key === 0) {
+              return [null]
+            }
+            return [item[1]]
+          })
+          sheet
+            .getRange(1 + index - 1, 4, mapItems.length, mapItems[0].length)
+            .setValues(mapItems)
+          break
         }
       }
     } catch (err) {
@@ -101,12 +127,25 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      for (let index = 0; index < items.length; index++) {
-        const textFinder = sheet.createTextFinder(items[index][0])
-        const ranges = textFinder.findAll()
-        if (ranges[0] != null) {
-          const target = ranges[0].getA1Notation().slice(1)
-          sheet.getRange(Number(target), 5).setValue(items[index][1])
+      for (let index = 0; index < 30; index++) {
+        const startDate = sheet.getRange(1 + index, 1).getValue()
+        if (
+          new Date(startDate).getFullYear() ===
+            new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 ===
+            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getDate() === new Date(items[1][0]).getDate()
+        ) {
+          const mapItems = items.map((item, key) => {
+            if (key === 0) {
+              return [null]
+            }
+            return [item[1]]
+          })
+          sheet
+            .getRange(1 + index - 1, 5, mapItems.length, mapItems[0].length)
+            .setValues(mapItems)
+          break
         }
       }
     } catch (err) {
@@ -128,12 +167,25 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      for (let index = 0; index < items.length; index++) {
-        const textFinder = sheet.createTextFinder(items[index][0])
-        const ranges = textFinder.findAll()
-        if (ranges != null) {
-          const target = ranges[0].getA1Notation().slice(1)
-          sheet.getRange(Number(target), 6).setValue(items[index][1])
+      for (let index = 0; index < 30; index++) {
+        const startDate = sheet.getRange(1 + index, 1).getValue()
+        if (
+          new Date(startDate).getFullYear() ===
+            new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 ===
+            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getDate() === new Date(items[1][0]).getDate()
+        ) {
+          const mapItems = items.map((item, key) => {
+            if (key === 0) {
+              return [null]
+            }
+            return [item[1]]
+          })
+          sheet
+            .getRange(1 + index - 1, 6, mapItems.length, mapItems[0].length)
+            .setValues(mapItems)
+          break
         }
       }
     } catch (err) {
@@ -155,12 +207,25 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      for (let index = 0; index < items.length; index++) {
-        const textFinder = sheet.createTextFinder(items[index][0])
-        const ranges = textFinder.findAll()
-        if (ranges[0] != null) {
-          const target = ranges[0].getA1Notation().slice(1)
-          sheet.getRange(Number(target), 7).setValue(items[index][1])
+      for (let index = 0; index < 30; index++) {
+        const startDate = sheet.getRange(1 + index, 1).getValue()
+        if (
+          new Date(startDate).getFullYear() ===
+            new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 ===
+            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getDate() === new Date(items[1][0]).getDate()
+        ) {
+          const mapItems = items.map((item, key) => {
+            if (key === 0) {
+              return [null]
+            }
+            return [item[1]]
+          })
+          sheet
+            .getRange(1 + index - 1, 7, mapItems.length, mapItems[0].length)
+            .setValues(mapItems)
+          break
         }
       }
     } catch (err) {
