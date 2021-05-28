@@ -33,3 +33,7 @@ global.fetchDeathTotalDaily = (): void => {
 global.fetchSevereTotalDaily = (): void => {
   Covid19Service.fetchSevereTotalDaily()
 }
+
+global.fetchVaccinationSummaryDaily = (): void => {
+  Covid19Service.fetchVaccinationSummaryDaily()
+}
