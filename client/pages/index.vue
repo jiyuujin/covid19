@@ -130,7 +130,7 @@
     </div>
 
     <h3 id="severeTotal" class="subtitle">
-      <a href="/#severeTotal">{{ `重傷者数` }}</a>
+      <a href="/#severeTotal">{{ `重症者数` }}</a>
     </h3>
     <div class="grid">
       <div class="grid_list">
