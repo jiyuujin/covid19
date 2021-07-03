@@ -168,7 +168,7 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      for (let index = 0; index < 30; index++) {
+      for (let index = 0; index < 40; index++) {
         const startDate = sheet.getRange(1 + index, 1).getValue()
         if (
           new Date(startDate).getFullYear() ===
