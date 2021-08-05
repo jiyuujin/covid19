@@ -2,8 +2,10 @@ import { getPropertyValue } from '~/utils'
 
 export const SLACK_INCOMING_API = getPropertyValue('SLACK_INCOMING_API')
 export const SPREADSHEET_NAME = getPropertyValue('SPREADSHEET_NAME')
-export const positiveCSV =
+export const positiveV1CSV =
   'https://www.mhlw.go.jp/content/pcr_positive_daily.csv'
+export const positiveV2CSV =
+  'https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv'
 export const testedCSV = 'https://www.mhlw.go.jp/content/pcr_tested_daily.csv'
 export const caseTotalCSV = 'https://www.mhlw.go.jp/content/cases_total.csv'
 export const recoveryTotalCSV =

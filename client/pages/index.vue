@@ -200,15 +200,15 @@ export default Vue.extend({
       .get()
       .then((res: any) => {
         console.log(res)
-        this.positiveTotalData = [...this.getItems(res, positiveChartColumns)]
-        this.testedTotalData = [...this.getItems(res, testedChartColumns)]
+        this.positiveTotalData = [...this.getV2Items(res, positiveChartColumns)]
+        this.testedTotalData = [...this.getV1Items(res, testedChartColumns)]
         this.vaccinationTotalData = [
-          ...this.getItems(res, vaccinationChartColumns)
+          ...this.getV1Items(res, vaccinationChartColumns)
         ]
-        this.caseTotalData = [...this.getItems(res, caseChartColumns)]
-        this.recoveryTotalData = [...this.getItems(res, recoveryChartColumns)]
-        this.deathTotalData = [...this.getItems(res, deathChartColumns)]
-        this.severeTotalData = [...this.getItems(res, severeChartColumns)]
+        this.caseTotalData = [...this.getV1Items(res, caseChartColumns)]
+        this.recoveryTotalData = [...this.getV1Items(res, recoveryChartColumns)]
+        this.deathTotalData = [...this.getV1Items(res, deathChartColumns)]
+        this.severeTotalData = [...this.getV1Items(res, severeChartColumns)]
         this.updatedAt = res.updated_at
       })
       .catch((err: any) => {
@@ -216,9 +216,24 @@ export default Vue.extend({
       })
   },
   methods: {
-    getItems(res: any, columns: string[]) {
+    getV2Items(res: any, columns: string[]) {
       let result: Array<Array<Date | string | number>> = [columns]
-      for (const item of res.data) {
+      for (const item of res.v2data) {
+        let temp: Array<Date | string | number> = []
+        for (let key = 0; key < columns.length; key++) {
+          if (key === 0) {
+            temp.push(new Date(item['Date']))
+          } else {
+            temp.push(Number(item['Newly confirmed cases']))
+          }
+        }
+        result.push(temp)
+      }
+      return result
+    },
+    getV1Items(res: any, columns: string[]) {
+      let result: Array<Array<Date | string | number>> = [columns]
+      for (const item of res.v1data) {
         let temp: Array<Date | string | number> = []
         for (let key = 0; key < columns.length; key++) {
           if (key === 0) {
