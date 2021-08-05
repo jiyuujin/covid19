@@ -10,8 +10,12 @@ global.createNewSpreadsheet = (): void => {
   SheetService.createNewFile(title)
 }
 
-global.fetchPCRPositiveDaily = (): void => {
-  Covid19Service.fetchPCRPositiveDaily()
+global.fetchPCRPositiveDailyV1 = (): void => {
+  Covid19Service.fetchPCRPositiveDailyV1()
+}
+
+global.fetchPCRPositiveDailyV2 = (): void => {
+  Covid19Service.fetchPCRPositiveDailyV2()
 }
 
 global.fetchPCRTestedDaily = (): void => {

@@ -7,7 +7,8 @@ import {
   SPREADSHEET_NAME,
   caseTotalCSV,
   deathTotalCSV,
-  positiveCSV,
+  positiveV1CSV,
+  positiveV2CSV,
   recoveryTotalCSV,
   severeTotalCSV,
   testedCSV,
@@ -16,24 +17,46 @@ import {
 } from '~/constants'
 
 const ss = SpreadsheetApp.openById(SPREADSHEET_NAME)
-const sheet = ss.getSheetByName('main')
+const sheetV1 = ss.getSheetByName('v1_main')
+const sheetV2 = ss.getSheetByName('v2_main')
 
 export class Covid19Service {
   /**
-   * PCR検査 陽性者数を取得する
+   * PCR検査 陽性者数 (V1) を取得する
    */
-  static fetchPCRPositiveDaily() {
-    const res = ApiService.getApi(positiveCSV)
+  static fetchPCRPositiveDailyV1() {
+    const res = ApiService.getApi(positiveV1CSV)
     const resData = res.getContentText()
     const items = convertCsv(resData)
 
     try {
-      sheet.getRange(1, 1, items.length, items[0].length).setValues(items)
+      sheetV1.getRange(1, 1, items.length, items[0].length).setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `陽性者数を取得しました - ${err}`
+          text: `陽性者数 (V1) を取得しました - ${err}`
+        })
+      )
+    }
+  }
+
+  /**
+   * PCR検査 陽性者数 (V2) を取得する
+   */
+  static fetchPCRPositiveDailyV2() {
+    const res = ApiService.getApi(positiveV2CSV)
+    const resData = res.getContentText()
+    const items = convertCsv(resData)
+
+    try {
+      Logger.log(items)
+      sheetV2.getRange(1, 1, items.length, items[0].length).setValues(items)
+    } catch (err) {
+      SlackService.sendMessage(
+        SLACK_INCOMING_API,
+        JSON.stringify({
+          text: `陽性者数 (V2) を取得しました - ${err}`
         })
       )
     }
@@ -49,7 +72,7 @@ export class Covid19Service {
 
     try {
       for (let index = 0; index < 30; index++) {
-        const startDate = sheet.getRange(1 + index, 1).getValue()
+        const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
           new Date(startDate).getFullYear() ===
             new Date(items[1][0]).getFullYear() &&
@@ -63,7 +86,7 @@ export class Covid19Service {
             }
             return [item[1]]
           })
-          sheet
+          sheetV1
             .getRange(1 + index - 1, 3, mapItems.length, mapItems[0].length)
             .setValues(mapItems)
           break
@@ -89,7 +112,7 @@ export class Covid19Service {
 
     try {
       for (let index = 0; index < 30; index++) {
-        const startDate = sheet.getRange(1 + index, 1).getValue()
+        const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
           new Date(startDate).getFullYear() ===
             new Date(items[1][0]).getFullYear() &&
@@ -103,7 +126,7 @@ export class Covid19Service {
             }
             return [item[1]]
           })
-          sheet
+          sheetV1
             .getRange(1 + index - 1, 4, mapItems.length, mapItems[0].length)
             .setValues(mapItems)
           break
@@ -129,7 +152,7 @@ export class Covid19Service {
 
     try {
       for (let index = 0; index < 30; index++) {
-        const startDate = sheet.getRange(1 + index, 1).getValue()
+        const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
           new Date(startDate).getFullYear() ===
             new Date(items[1][0]).getFullYear() &&
@@ -143,7 +166,7 @@ export class Covid19Service {
             }
             return [item[1]]
           })
-          sheet
+          sheetV1
             .getRange(1 + index - 1, 5, mapItems.length, mapItems[0].length)
             .setValues(mapItems)
           break
@@ -169,7 +192,7 @@ export class Covid19Service {
 
     try {
       for (let index = 0; index < 40; index++) {
-        const startDate = sheet.getRange(1 + index, 1).getValue()
+        const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
           new Date(startDate).getFullYear() ===
             new Date(items[1][0]).getFullYear() &&
@@ -183,7 +206,7 @@ export class Covid19Service {
             }
             return [item[1]]
           })
-          sheet
+          sheetV1
             .getRange(1 + index - 1, 6, mapItems.length, mapItems[0].length)
             .setValues(mapItems)
           break
@@ -209,7 +232,7 @@ export class Covid19Service {
 
     try {
       for (let index = 0; index < 30; index++) {
-        const startDate = sheet.getRange(1 + index, 1).getValue()
+        const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
           new Date(startDate).getFullYear() ===
             new Date(items[1][0]).getFullYear() &&
@@ -223,7 +246,7 @@ export class Covid19Service {
             }
             return [item[1]]
           })
-          sheet
+          sheetV1
             .getRange(1 + index - 1, 7, mapItems.length, mapItems[0].length)
             .setValues(mapItems)
           break
@@ -246,7 +269,7 @@ export class Covid19Service {
 
     try {
       for (let index = 450; index < 450 + 30; index++) {
-        const startDate = sheet.getRange(1 + index, 1).getValue()
+        const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
           new Date(startDate).getFullYear() ===
             new Date(items[1][0]).getFullYear() &&
@@ -266,10 +289,10 @@ export class Covid19Service {
             }
             return [item[2]]
           })
-          sheet
+          sheetV1
             .getRange(1 + index - 1, 10, mapItems1.length, mapItems1[0].length)
             .setValues(mapItems1)
-          sheet
+          sheetV1
             .getRange(1 + index - 1, 11, mapItems2.length, mapItems2[0].length)
             .setValues(mapItems2)
           break
