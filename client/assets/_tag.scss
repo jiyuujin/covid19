@@ -1,0 +1,28 @@
+.tag {
+  display: inline-block;
+  padding: 0 7px;
+  margin-right: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #8b949e;
+  background-color: transparent;
+  border: 1px solid #30363d;
+  border-radius: 2em;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .tag {
+    color: #f3f3f3;
+    border: 1px solid #dedede;
+
+    a {
+      //color: #718096;
+    }
+  }
+}

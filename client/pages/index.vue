@@ -27,6 +27,9 @@
     <h2>データ</h2>
     <h3 id="positiveTotal" class="subtitle">
       <a href="/#positiveTotal">{{ `検査陽性者数` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `New API` }}
+      </span>
     </h3>
     <div class="grid">
       <div class="grid_list">
@@ -44,6 +47,9 @@
 
     <h3 id="testedTotal" class="subtitle">
       <a href="/#testedTotal">{{ `検査実施件数` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `API V1` }}
+      </span>
     </h3>
     <div class="grid">
       <div class="grid_list">
@@ -61,6 +67,9 @@
 
     <h3 id="vaccinationTotal" class="subtitle">
       <a href="/#vaccinationTotal">{{ `ワクチン接種数累計` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `API V1` }}
+      </span>
     </h3>
     <div class="grid">
       <div class="grid_list">
@@ -80,6 +89,9 @@
 
     <h3 id="recoveryTotal" class="subtitle">
       <a href="/#recoveryTotal">{{ `退院、療養解除となった者` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `API V1` }}
+      </span>
     </h3>
     <div class="grid">
       <div class="grid_list">
@@ -97,6 +109,9 @@
 
     <h3 id="caseTotal" class="subtitle">
       <a href="/#caseTotal">{{ `入院治療を要する者` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `API V1` }}
+      </span>
     </h3>
     <div class="grid">
       <div class="grid_list">
@@ -114,6 +129,9 @@
 
     <h3 id="deathTotal" class="subtitle">
       <a href="/#deathTotal">{{ `死亡者数` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `API V1` }}
+      </span>
     </h3>
     <div class="grid">
       <div class="grid_list">
@@ -131,6 +149,9 @@
 
     <h3 id="severeTotal" class="subtitle">
       <a href="/#severeTotal">{{ `重症者数` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `API V1` }}
+      </span>
     </h3>
     <div class="grid">
       <div class="grid_list">

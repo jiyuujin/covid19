@@ -1,4 +1,9 @@
 .subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  vertical-align: middle;
+
   a {
     color: #000;
     text-decoration: none;
