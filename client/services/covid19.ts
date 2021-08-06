@@ -13,3 +13,29 @@ export const getPositiveV2Items = (res: any, columns: string[]) => {
   }
   return result
 }
+
+export const getCaseV2Items = (
+  res: any,
+  columns: string[],
+  requiredCare: boolean
+) => {
+  let result: Array<Array<Date | string | number>> = [columns]
+  for (const item of res.v2CaseData) {
+    let temp: Array<Date | string | number> = []
+    for (let key = 0; key < columns.length; key++) {
+      if (key === 0) {
+        temp.push(new Date(item['Date']))
+      } else if (key === 1) {
+        if (requiredCare) {
+          temp.push(Number(item['Requiring inpatient care']))
+        } else {
+          temp.push(
+            Number(item['Discharged from hospital or released from treatment'])
+          )
+        }
+      }
+    }
+    result.push(temp)
+  }
+  return result
+}

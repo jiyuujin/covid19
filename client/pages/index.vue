@@ -90,7 +90,7 @@
     <h3 id="recoveryTotal" class="subtitle">
       <a href="/#recoveryTotal">{{ `退院、療養解除となった者` }}</a>
       <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `API V1` }}
+        {{ `New API` }}
       </span>
     </h3>
     <div class="grid">
@@ -110,7 +110,7 @@
     <h3 id="caseTotal" class="subtitle">
       <a href="/#caseTotal">{{ `入院治療を要する者` }}</a>
       <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `API V1` }}
+        {{ `New API` }}
       </span>
     </h3>
     <div class="grid">
@@ -190,7 +190,7 @@ import {
   deathChartColumns,
   severeChartColumns
 } from '~/services/chartColumns'
-import { getPositiveV2Items } from '~/services/covid19'
+import { getPositiveV2Items, getCaseV2Items } from '~/services/covid19'
 
 const GoogleChart = () => import('~/components/GoogleChart.vue')
 
@@ -229,8 +229,10 @@ export default Vue.extend({
         this.vaccinationTotalData = [
           ...this.getV1Items(res, vaccinationChartColumns)
         ]
-        this.caseTotalData = [...this.getV1Items(res, caseChartColumns)]
-        this.recoveryTotalData = [...this.getV1Items(res, recoveryChartColumns)]
+        this.caseTotalData = [...getCaseV2Items(res, caseChartColumns, true)]
+        this.recoveryTotalData = [
+          ...getCaseV2Items(res, recoveryChartColumns, false)
+        ]
         this.deathTotalData = [...this.getV1Items(res, deathChartColumns)]
         this.severeTotalData = [...this.getV1Items(res, severeChartColumns)]
         this.updatedAt = res.updated_at

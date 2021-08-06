@@ -7,7 +7,9 @@ export const positiveV1CSV =
 export const positiveV2CSV =
   'https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv'
 export const testedCSV = 'https://www.mhlw.go.jp/content/pcr_tested_daily.csv'
-export const caseTotalCSV = 'https://www.mhlw.go.jp/content/cases_total.csv'
+export const caseTotalV1CSV = 'https://www.mhlw.go.jp/content/cases_total.csv'
+export const caseTotalV2CSV =
+  'https://covid19.mhlw.go.jp/public/opendata/requiring_inpatient_care_etc_daily.csv'
 export const recoveryTotalCSV =
   'https://www.mhlw.go.jp/content/recovery_total.csv'
 export const deathTotalCSV = 'https://www.mhlw.go.jp/content/death_total.csv'

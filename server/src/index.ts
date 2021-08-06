@@ -22,8 +22,12 @@ global.fetchPCRTestedDaily = (): void => {
   Covid19Service.fetchPCRTestedDaily()
 }
 
-global.fetchPCRCaseTotalDaily = (): void => {
-  Covid19Service.fetchPCRCaseTotalDaily()
+global.fetchPCRCaseTotalV1Daily = (): void => {
+  Covid19Service.fetchPCRCaseTotalV1Daily()
+}
+
+global.fetchPCRCaseTotalV2Daily = (): void => {
+  Covid19Service.fetchPCRCaseTotalV2Daily()
 }
 
 global.fetchPCRRecoveryTotalDaily = (): void => {
