@@ -150,7 +150,7 @@
     <h3 id="severeTotal" class="subtitle">
       <a href="/#severeTotal">{{ `重症者数` }}</a>
       <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `API V1` }}
+        {{ `New API` }}
       </span>
     </h3>
     <div class="grid">
@@ -193,7 +193,8 @@ import {
 import {
   getPositiveV2Items,
   getCaseV2Items,
-  getDeathV2Items
+  getDeathV2Items,
+  getSevereV2Items
 } from '~/services/covid19'
 
 const GoogleChart = () => import('~/components/GoogleChart.vue')
@@ -238,7 +239,7 @@ export default Vue.extend({
           ...getCaseV2Items(res, recoveryChartColumns, false)
         ]
         this.deathTotalData = [...getDeathV2Items(res, deathChartColumns)]
-        this.severeTotalData = [...this.getV1Items(res, severeChartColumns)]
+        this.severeTotalData = [...getSevereV2Items(res, severeChartColumns)]
         this.updatedAt = res.updated_at
       })
       .catch((err: any) => {
