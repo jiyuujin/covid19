@@ -108,7 +108,7 @@ export class Covid19Service {
   /**
    * 入院治療等を要する者の数 (V1) を取得する
    */
-  static fetchPCRCaseTotalV1Daily() {
+  static fetchPCRCaseTotalDailyV1() {
     const res = ApiService.getApi(caseTotalV1CSV)
     const resData = res.getContentText()
     const items = convertCsv(resData)
@@ -148,7 +148,7 @@ export class Covid19Service {
   /**
    * 入院治療等を要する者の数 (V2) を取得する
    */
-  static fetchPCRCaseTotalV2Daily() {
+  static fetchPCRCaseTotalDailyV2() {
     const res = ApiService.getApi(caseTotalV2CSV)
     const resData = res.getContentText()
     const items = convertCsv(resData)
