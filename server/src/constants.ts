@@ -15,6 +15,9 @@ export const recoveryTotalCSV =
 export const deathTotalV1CSV = 'https://www.mhlw.go.jp/content/death_total.csv'
 export const deathTotalV2CSV =
   'https://covid19.mhlw.go.jp/public/opendata/deaths_cumulative_daily.csv'
-export const severeTotalCSV = 'https://www.mhlw.go.jp/content/severe_daily.csv'
+export const severeTotalV1CSV =
+  'https://www.mhlw.go.jp/content/severe_daily.csv'
+export const severeTotalV2CSV =
+  'https://covid19.mhlw.go.jp/public/opendata/severe_cases_daily.csv'
 export const vaccinationSummaryCSV =
   'https://vrs-data.cio.go.jp/vaccination/opendata/latest/summary_by_date.csv'
