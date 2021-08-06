@@ -34,8 +34,12 @@ global.fetchPCRRecoveryTotalDaily = (): void => {
   Covid19Service.fetchPCRRecoveryTotalDaily()
 }
 
-global.fetchDeathTotalDaily = (): void => {
-  Covid19Service.fetchDeathTotalDaily()
+global.fetchDeathTotalDailyV1 = (): void => {
+  Covid19Service.fetchDeathTotalDailyV1()
+}
+
+global.fetchDeathTotalDailyV2 = (): void => {
+  Covid19Service.fetchDeathTotalDailyV2()
 }
 
 global.fetchSevereTotalDaily = (): void => {

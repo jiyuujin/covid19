@@ -39,3 +39,19 @@ export const getCaseV2Items = (
   }
   return result
 }
+
+export const getDeathV2Items = (res: any, columns: string[]) => {
+  let result: Array<Array<Date | string | number>> = [columns]
+  for (const item of res.v2DeathData) {
+    let temp: Array<Date | string | number> = []
+    for (let key = 0; key < columns.length; key++) {
+      if (key === 0) {
+        temp.push(new Date(item['Date']))
+      } else if (key === 1) {
+        temp.push(Number(item['Deaths(Cumulative)']))
+      }
+    }
+    result.push(temp)
+  }
+  return result
+}

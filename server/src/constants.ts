@@ -12,7 +12,9 @@ export const caseTotalV2CSV =
   'https://covid19.mhlw.go.jp/public/opendata/requiring_inpatient_care_etc_daily.csv'
 export const recoveryTotalCSV =
   'https://www.mhlw.go.jp/content/recovery_total.csv'
-export const deathTotalCSV = 'https://www.mhlw.go.jp/content/death_total.csv'
+export const deathTotalV1CSV = 'https://www.mhlw.go.jp/content/death_total.csv'
+export const deathTotalV2CSV =
+  'https://covid19.mhlw.go.jp/public/opendata/deaths_cumulative_daily.csv'
 export const severeTotalCSV = 'https://www.mhlw.go.jp/content/severe_daily.csv'
 export const vaccinationSummaryCSV =
   'https://vrs-data.cio.go.jp/vaccination/opendata/latest/summary_by_date.csv'
