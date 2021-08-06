@@ -190,6 +190,7 @@ import {
   deathChartColumns,
   severeChartColumns
 } from '~/services/chartColumns'
+import { getPositiveV2Items } from '~/services/covid19'
 
 const GoogleChart = () => import('~/components/GoogleChart.vue')
 
@@ -221,7 +222,9 @@ export default Vue.extend({
       .get()
       .then((res: any) => {
         console.log(res)
-        this.positiveTotalData = [...this.getV2Items(res, positiveChartColumns)]
+        this.positiveTotalData = [
+          ...getPositiveV2Items(res, positiveChartColumns)
+        ]
         this.testedTotalData = [...this.getV1Items(res, testedChartColumns)]
         this.vaccinationTotalData = [
           ...this.getV1Items(res, vaccinationChartColumns)
@@ -237,21 +240,6 @@ export default Vue.extend({
       })
   },
   methods: {
-    getV2Items(res: any, columns: string[]) {
-      let result: Array<Array<Date | string | number>> = [columns]
-      for (const item of res.v2data) {
-        let temp: Array<Date | string | number> = []
-        for (let key = 0; key < columns.length; key++) {
-          if (key === 0) {
-            temp.push(new Date(item['Date']))
-          } else {
-            temp.push(Number(item['Newly confirmed cases']))
-          }
-        }
-        result.push(temp)
-      }
-      return result
-    },
     getV1Items(res: any, columns: string[]) {
       let result: Array<Array<Date | string | number>> = [columns]
       for (const item of res.v1data) {

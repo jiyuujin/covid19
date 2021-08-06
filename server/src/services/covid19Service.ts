@@ -18,7 +18,7 @@ import {
 
 const ss = SpreadsheetApp.openById(SPREADSHEET_NAME)
 const sheetV1 = ss.getSheetByName('v1_main')
-const sheetV2 = ss.getSheetByName('v2_main')
+const sheetPositiveV2 = ss.getSheetByName('v2_positive_main')
 
 export class Covid19Service {
   /**
@@ -50,8 +50,9 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      Logger.log(items)
-      sheetV2.getRange(1, 1, items.length, items[0].length).setValues(items)
+      sheetPositiveV2
+        .getRange(1, 1, items.length, items[0].length)
+        .setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
