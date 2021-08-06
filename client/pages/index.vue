@@ -191,6 +191,7 @@ import {
   severeChartColumns
 } from '~/services/chartColumns'
 import {
+  getV1Items,
   getPositiveV2Items,
   getCaseV2Items,
   getDeathV2Items,
@@ -230,9 +231,9 @@ export default Vue.extend({
         this.positiveTotalData = [
           ...getPositiveV2Items(res, positiveChartColumns)
         ]
-        this.testedTotalData = [...this.getV1Items(res, testedChartColumns)]
+        this.testedTotalData = [...getV1Items(res, testedChartColumns)]
         this.vaccinationTotalData = [
-          ...this.getV1Items(res, vaccinationChartColumns)
+          ...getV1Items(res, vaccinationChartColumns)
         ]
         this.caseTotalData = [...getCaseV2Items(res, caseChartColumns, true)]
         this.recoveryTotalData = [
@@ -245,23 +246,6 @@ export default Vue.extend({
       .catch((err: any) => {
         console.error(err)
       })
-  },
-  methods: {
-    getV1Items(res: any, columns: string[]) {
-      let result: Array<Array<Date | string | number>> = [columns]
-      for (const item of res.v1data) {
-        let temp: Array<Date | string | number> = []
-        for (let key = 0; key < columns.length; key++) {
-          if (key === 0) {
-            temp.push(new Date(item[columns[key]]))
-          } else {
-            temp.push(Number(item[columns[key]]))
-          }
-        }
-        result.push(temp)
-      }
-      return result
-    }
   }
 })
 </script>
