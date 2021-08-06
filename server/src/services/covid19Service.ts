@@ -5,7 +5,8 @@ import { convertCsv } from '~/utils'
 
 import {
   SPREADSHEET_NAME,
-  caseTotalCSV,
+  caseTotalV1CSV,
+  caseTotalV2CSV,
   deathTotalCSV,
   positiveV1CSV,
   positiveV2CSV,
@@ -19,6 +20,7 @@ import {
 const ss = SpreadsheetApp.openById(SPREADSHEET_NAME)
 const sheetV1 = ss.getSheetByName('v1_main')
 const sheetPositiveV2 = ss.getSheetByName('v2_positive_main')
+const sheetCaseV2 = ss.getSheetByName('v2_case_main')
 
 export class Covid19Service {
   /**
@@ -104,10 +106,10 @@ export class Covid19Service {
   }
 
   /**
-   * 入院治療等を要する者の数を取得する
+   * 入院治療等を要する者の数 (V1) を取得する
    */
-  static fetchPCRCaseTotalDaily() {
-    const res = ApiService.getApi(caseTotalCSV)
+  static fetchPCRCaseTotalV1Daily() {
+    const res = ApiService.getApi(caseTotalV1CSV)
     const resData = res.getContentText()
     const items = convertCsv(resData)
 
@@ -138,6 +140,26 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `入院治療等を要する者の数を取得しました - ${err}`
+        })
+      )
+    }
+  }
+
+  /**
+   * 入院治療等を要する者の数 (V2) を取得する
+   */
+  static fetchPCRCaseTotalV2Daily() {
+    const res = ApiService.getApi(caseTotalV2CSV)
+    const resData = res.getContentText()
+    const items = convertCsv(resData)
+
+    try {
+      sheetCaseV2.getRange(1, 1, items.length, items[0].length).setValues(items)
+    } catch (err) {
+      SlackService.sendMessage(
+        SLACK_INCOMING_API,
+        JSON.stringify({
+          text: `入院治療等を要する者の数 (V2) を取得しました - ${err}`
         })
       )
     }
