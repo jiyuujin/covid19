@@ -130,7 +130,7 @@
     <h3 id="deathTotal" class="subtitle">
       <a href="/#deathTotal">{{ `死亡者数` }}</a>
       <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `API V1` }}
+        {{ `New API` }}
       </span>
     </h3>
     <div class="grid">
@@ -190,7 +190,11 @@ import {
   deathChartColumns,
   severeChartColumns
 } from '~/services/chartColumns'
-import { getPositiveV2Items, getCaseV2Items } from '~/services/covid19'
+import {
+  getPositiveV2Items,
+  getCaseV2Items,
+  getDeathV2Items
+} from '~/services/covid19'
 
 const GoogleChart = () => import('~/components/GoogleChart.vue')
 
@@ -233,7 +237,7 @@ export default Vue.extend({
         this.recoveryTotalData = [
           ...getCaseV2Items(res, recoveryChartColumns, false)
         ]
-        this.deathTotalData = [...this.getV1Items(res, deathChartColumns)]
+        this.deathTotalData = [...getDeathV2Items(res, deathChartColumns)]
         this.severeTotalData = [...this.getV1Items(res, severeChartColumns)]
         this.updatedAt = res.updated_at
       })
