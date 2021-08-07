@@ -44,15 +44,15 @@
     </h3>
     <div class="grid">
       <div class="grid_list">
-        <div class="info">
+        <div v-if="positiveTotalData.length !== 0" class="info">
           <google-chart
-            v-if="positiveTotalData.length !== 0"
             chart-type="ColumnChart"
             :chart-data="positiveTotalData"
             :chart-options="positiveTotalOptions"
             class="chart"
           />
         </div>
+        <loading-svg v-else class="loading" />
       </div>
     </div>
 
@@ -64,15 +64,15 @@
     </h3>
     <div class="grid">
       <div class="grid_list">
-        <div class="info">
+        <div v-if="testedTotalData.length !== 0" class="info">
           <google-chart
-            v-if="testedTotalData.length !== 0"
             chart-type="ColumnChart"
             :chart-data="testedTotalData"
             :chart-options="testedTotalOptions"
             class="chart"
           />
         </div>
+        <loading-svg v-else class="loading" />
       </div>
     </div>
 
@@ -85,15 +85,15 @@
     <div class="grid">
       <div class="grid_list">
         <div class="info">
-          <div class="info">
+          <div v-if="vaccinationTotalData.length !== 0" class="info">
             <google-chart
-              v-if="vaccinationTotalData.length !== 0"
               chart-type="ColumnChart"
               :chart-data="vaccinationTotalData"
               :chart-options="vaccinationOptions"
               class="chart"
             />
           </div>
+          <loading-svg v-else class="loading" />
         </div>
       </div>
     </div>
@@ -106,15 +106,15 @@
     </h3>
     <div class="grid">
       <div class="grid_list">
-        <div class="info">
+        <div v-if="recoveryTotalData.length !== 0" class="info">
           <google-chart
-            v-if="recoveryTotalData.length !== 0"
             chart-type="ColumnChart"
             :chart-data="recoveryTotalData"
             :chart-options="recoveryTotalOptions"
             class="chart"
           />
         </div>
+        <loading-svg v-else class="loading" />
       </div>
     </div>
 
@@ -126,15 +126,15 @@
     </h3>
     <div class="grid">
       <div class="grid_list">
-        <div class="info">
+        <div v-if="caseTotalData.length !== 0" class="info">
           <google-chart
-            v-if="caseTotalData.length !== 0"
             chart-type="ColumnChart"
             :chart-data="caseTotalData"
             :chart-options="caseTotalOptions"
             class="chart"
           />
         </div>
+        <loading-svg v-else class="loading" />
       </div>
     </div>
 
@@ -146,15 +146,15 @@
     </h3>
     <div class="grid">
       <div class="grid_list">
-        <div class="info">
+        <div v-if="deathTotalData.length !== 0" class="info">
           <google-chart
-            v-if="deathTotalData.length !== 0"
             chart-type="ColumnChart"
             :chart-data="deathTotalData"
             :chart-options="deathTotalOptions"
             class="chart"
           />
         </div>
+        <loading-svg v-else class="loading" />
       </div>
     </div>
 
@@ -166,15 +166,15 @@
     </h3>
     <div class="grid">
       <div class="grid_list">
-        <div class="info">
+        <div v-if="severeTotalData.length !== 0" class="info">
           <google-chart
-            v-if="severeTotalData.length !== 0"
             chart-type="ColumnChart"
             :chart-data="severeTotalData"
             :chart-options="severeTotalOptions"
             class="chart"
           />
         </div>
+        <loading-svg v-else class="loading" />
       </div>
     </div>
   </main>
@@ -210,10 +210,13 @@ import {
 } from '~/services/covid19'
 import { prefectures } from '~/services/japan'
 
+import LoadingSvg from '~/static/loading.svg'
+
 const GoogleChart = () => import('~/components/GoogleChart.vue')
 
 export default Vue.extend({
   components: {
+    LoadingSvg,
     GoogleChart
   },
   data() {

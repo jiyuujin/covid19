@@ -29,7 +29,7 @@ export default {
 
   buildModules: ['@nuxt/typescript-build'],
 
-  modules: ['@nuxt/http', '@nuxtjs/pwa'],
+  modules: ['@nuxt/http', '@nuxtjs/pwa', 'nuxt-svg-loader'],
 
   build: {
     babel: {
