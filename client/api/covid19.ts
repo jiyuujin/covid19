@@ -7,8 +7,8 @@ export class COVID19Repository {
     this.http = $http
   }
 
-  get() {
+  get(prefecture?: string) {
     const uri = process.env.NUXT_COVID19_API
-    return this.http.$get(uri!)
+    return this.http.$get(`${uri!}?prefecture=${prefecture!}`)
   }
 }

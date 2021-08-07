@@ -25,6 +25,17 @@
     </h3>
 
     <h2>データ</h2>
+    <h3 class="subtitle">
+      {{ `都道府県` }}
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `New API` }}
+      </span>
+    </h3>
+    <prefecture-select
+      :options="prefectures"
+      :values="prefecture"
+      @handle-select="handleSelect"
+    />
     <h3 id="positiveTotal" class="subtitle">
       <a href="/#positiveTotal">{{ `検査陽性者数` }}</a>
       <span class="tag" :style="{ marginLeft: '8px' }">
@@ -197,6 +208,7 @@ import {
   getDeathV2Items,
   getSevereV2Items
 } from '~/services/covid19'
+import { prefectures } from '~/services/japan'
 
 const GoogleChart = () => import('~/components/GoogleChart.vue')
 
@@ -214,38 +226,66 @@ export default Vue.extend({
       deathTotalData: [] as Array<Array<Date | string | number>>,
       severeTotalData: [] as Array<Array<Date | string | number>>,
       updatedAt: '' as string,
+      prefecture: 0 as number,
       positiveTotalOptions: positiveChartOptions,
       testedTotalOptions: testedChartOptions,
       vaccinationOptions: vaccinationChartOptions,
       caseTotalOptions: caseChartOptions,
       recoveryTotalOptions: recoveryChartOptions,
       deathTotalOptions: deathChartOptions,
-      severeTotalOptions: severeChartOptions
+      severeTotalOptions: severeChartOptions,
+      prefectures: prefectures
+    }
+  },
+  watch: {
+    async prefecture() {
+      this.reset()
+      await this.fetchResponse(
+        this.prefectures.filter((p) => p.value === this.prefecture)[0].text
+      )
     }
   },
   async mounted() {
-    await this.$repositories.cr
-      .get()
-      .then((res: any) => {
-        console.log(res)
-        this.positiveTotalData = [
-          ...getPositiveV2Items(res, positiveChartColumns)
-        ]
-        this.testedTotalData = [...getV1Items(res, testedChartColumns)]
-        this.vaccinationTotalData = [
-          ...getV1Items(res, vaccinationChartColumns)
-        ]
-        this.caseTotalData = [...getCaseV2Items(res, caseChartColumns, true)]
-        this.recoveryTotalData = [
-          ...getCaseV2Items(res, recoveryChartColumns, false)
-        ]
-        this.deathTotalData = [...getDeathV2Items(res, deathChartColumns)]
-        this.severeTotalData = [...getSevereV2Items(res, severeChartColumns)]
-        this.updatedAt = res.updated_at
-      })
-      .catch((err: any) => {
-        console.error(err)
-      })
+    await this.fetchResponse(
+      this.prefectures.filter((p) => p.value === this.prefecture)[0].text
+    )
+  },
+  methods: {
+    handleSelect(val: number) {
+      this.prefecture = val
+    },
+    reset() {
+      this.positiveTotalData = []
+      this.testedTotalData = []
+      this.vaccinationTotalData = []
+      this.caseTotalData = []
+      this.recoveryTotalData = []
+      this.deathTotalData = []
+      this.severeTotalData = []
+    },
+    async fetchResponse(prefecture: string) {
+      await this.$repositories.cr
+        .get(prefecture)
+        .then((res: any) => {
+          this.positiveTotalData = [
+            ...getPositiveV2Items(res, positiveChartColumns)
+          ]
+          this.testedTotalData = [...getV1Items(res, testedChartColumns)]
+          this.vaccinationTotalData = [
+            ...getV1Items(res, vaccinationChartColumns)
+          ]
+          this.caseTotalData = [...getCaseV2Items(res, caseChartColumns, true)]
+          this.recoveryTotalData = [
+            ...getCaseV2Items(res, recoveryChartColumns, false)
+          ]
+          this.deathTotalData = [...getDeathV2Items(res, deathChartColumns)]
+          this.severeTotalData = [...getSevereV2Items(res, severeChartColumns)]
+          this.updatedAt = res.updated_at
+        })
+        .catch((err: any) => {
+          console.error(err)
+        })
+    }
   }
 })
 </script>
