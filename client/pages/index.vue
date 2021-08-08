@@ -84,17 +84,15 @@
     </h3>
     <div class="grid">
       <div class="grid_list">
-        <div class="info">
-          <div v-if="vaccinationTotalData.length !== 0" class="info">
-            <google-chart
-              chart-type="ColumnChart"
-              :chart-data="vaccinationTotalData"
-              :chart-options="vaccinationOptions"
-              class="chart"
-            />
-          </div>
-          <loading-svg v-else class="loading" />
+        <div v-if="vaccinationTotalData.length !== 0" class="info">
+          <google-chart
+            chart-type="ColumnChart"
+            :chart-data="vaccinationTotalData"
+            :chart-options="vaccinationOptions"
+            class="chart"
+          />
         </div>
+        <loading-svg v-else class="loading" />
       </div>
     </div>
 
