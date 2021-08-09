@@ -1,3 +1,5 @@
+import { generalOg, twitterOg } from './client/utils/og.constants'
+
 const sass = require('sass')
 const fiber = require('fibers')
 
@@ -9,9 +11,15 @@ export default {
   head: {
     title: 'top',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      {
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      ...generalOg(),
+      ...twitterOg()
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
