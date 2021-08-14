@@ -14,6 +14,40 @@ export const getV1Items = (res: any, columns: string[]) => {
   return result
 }
 
+export const getVaccinationTotalItems = (res: any, columns: string[]) => {
+  let result: Array<Array<Date | string | number>> = [columns]
+  for (const item of res.vaccinationDateData) {
+    let temp: Array<Date | string | number> = []
+    for (let key = 0; key < columns.length; key++) {
+      if (key === 0) {
+        temp.push(new Date(item['date']))
+      } else if (key === 1) {
+        temp.push(Number(item['total']))
+      }
+    }
+    result.push(temp)
+  }
+  return result
+}
+
+export const getVaccinationDateItems = (res: any, columns: string[]) => {
+  let result: Array<Array<Date | string | number>> = [columns]
+  for (const item of res.vaccinationDateData) {
+    let temp: Array<Date | string | number> = []
+    for (let key = 0; key < columns.length; key++) {
+      if (key === 0) {
+        temp.push(new Date(item['date']))
+      } else if (key === 1) {
+        temp.push(Number(item['count_first_or_mid_general']))
+      } else {
+        temp.push(Number(item['count_second_or_full_general']))
+      }
+    }
+    result.push(temp)
+  }
+  return result
+}
+
 export const getPositiveV2Items = (res: any, columns: string[]) => {
   let result: Array<Array<Date | string | number>> = [columns]
   for (const item of res.v2PositiveData) {

@@ -2,7 +2,16 @@ export const positiveChartColumns: string[] = ['日付', 'PCR 検査陽性者数
 
 export const testedChartColumns: string[] = ['日付', 'PCR 検査実施件数(単日)']
 
-export const vaccinationChartColumns: string[] = ['日付', 'ワクチン接種数累計']
+export const vaccinationTotalChartColumns: string[] = [
+  '日付',
+  'ワクチン接種数累計'
+]
+
+export const vaccinationDateChartColumns: string[] = [
+  '日付',
+  'ワクチン接種数 (1回目)',
+  'ワクチン接種数 (2回目)'
+]
 
 export const caseChartColumns: string[] = ['日付', '入院治療を要する者']
 

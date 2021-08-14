@@ -15,12 +15,13 @@ import {
   severeTotalV1CSV,
   severeTotalV2CSV,
   testedCSV,
-  vaccinationSummaryCSV,
+  vaccinationDateSummaryCSV,
   SLACK_INCOMING_API
 } from '~/constants'
 
 const ss = SpreadsheetApp.openById(SPREADSHEET_NAME)
 const sheetV1 = ss.getSheetByName('v1_main')
+const sheetVaccinationDate = ss.getSheetByName('vaccination_date_main')
 const sheetPositiveV2 = ss.getSheetByName('v2_positive_main')
 const sheetCaseV2 = ss.getSheetByName('v2_case_main')
 const sheetDeathV2 = ss.getSheetByName('v2_death_main')
@@ -334,46 +335,19 @@ export class Covid19Service {
   }
 
   static fetchVaccinationSummaryDaily() {
-    const res = ApiService.getApi(vaccinationSummaryCSV)
+    const res = ApiService.getApi(vaccinationDateSummaryCSV)
     const resData = res.getContentText()
     const items = convertCsv(resData)
 
     try {
-      for (let index = 450; index < 450 + 30; index++) {
-        const startDate = sheetV1.getRange(1 + index, 1).getValue()
-        if (
-          new Date(startDate).getFullYear() ===
-            new Date(items[1][0]).getFullYear() &&
-          new Date(startDate).getMonth() + 1 ===
-            new Date(items[1][0]).getMonth() + 1 &&
-          new Date(startDate).getDate() === new Date(items[1][0]).getDate()
-        ) {
-          const mapItems1 = items.map((item, key) => {
-            if (key === 0) {
-              return [null]
-            }
-            return [item[1]]
-          })
-          const mapItems2 = items.map((item, key) => {
-            if (key === 0) {
-              return [null]
-            }
-            return [item[2]]
-          })
-          sheetV1
-            .getRange(1 + index - 1, 10, mapItems1.length, mapItems1[0].length)
-            .setValues(mapItems1)
-          sheetV1
-            .getRange(1 + index - 1, 11, mapItems2.length, mapItems2[0].length)
-            .setValues(mapItems2)
-          break
-        }
-      }
+      sheetVaccinationDate
+        .getRange(1, 1, items.length, items[0].length)
+        .setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `ワクチン接種の数を取得しました - ${err}`
+          text: `ワクチン接種者の数を取得しました - ${err}`
         })
       )
     }

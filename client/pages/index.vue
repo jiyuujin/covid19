@@ -97,6 +97,26 @@
       </div>
     </div>
 
+    <h3 id="vaccinationDate" class="subtitle">
+      <a href="/#vaccinationDate">{{ `ワクチン接種数` }}</a>
+      <span class="tag" :style="{ marginLeft: '8px' }">
+        {{ `API V1` }}
+      </span>
+    </h3>
+    <div class="grid">
+      <div class="grid_list">
+        <div v-if="vaccinationDateData.length !== 0" class="info">
+          <google-chart
+            chart-type="ColumnChart"
+            :chart-data="vaccinationDateData"
+            :chart-options="vaccinationOptions"
+            class="chart"
+          />
+        </div>
+        <loading-svg v-else class="loading" />
+      </div>
+    </div>
+
     <h3 id="recoveryTotal" class="subtitle">
       <a href="/#recoveryTotal">{{ `退院、療養解除となった者` }}</a>
       <span class="tag" :style="{ marginLeft: '8px' }">
@@ -194,7 +214,8 @@ import {
 import {
   positiveChartColumns,
   testedChartColumns,
-  vaccinationChartColumns,
+  vaccinationTotalChartColumns,
+  vaccinationDateChartColumns,
   caseChartColumns,
   recoveryChartColumns,
   deathChartColumns,
@@ -202,6 +223,8 @@ import {
 } from '~/services/chartColumns'
 import {
   getV1Items,
+  getVaccinationTotalItems,
+  getVaccinationDateItems,
   getPositiveV2Items,
   getCaseV2Items,
   getDeathV2Items,
@@ -223,6 +246,7 @@ export default Vue.extend({
       positiveTotalData: [] as Array<Array<Date | string | number>>,
       testedTotalData: [] as Array<Array<Date | string | number>>,
       vaccinationTotalData: [] as Array<Array<Date | string | number>>,
+      vaccinationDateData: [] as Array<Array<Date | string | number>>,
       caseTotalData: [] as Array<Array<Date | string | number>>,
       recoveryTotalData: [] as Array<Array<Date | string | number>>,
       deathTotalData: [] as Array<Array<Date | string | number>>,
@@ -260,6 +284,7 @@ export default Vue.extend({
       this.positiveTotalData = []
       this.testedTotalData = []
       this.vaccinationTotalData = []
+      this.vaccinationDateData = []
       this.caseTotalData = []
       this.recoveryTotalData = []
       this.deathTotalData = []
@@ -274,7 +299,10 @@ export default Vue.extend({
           ]
           this.testedTotalData = [...getV1Items(res, testedChartColumns)]
           this.vaccinationTotalData = [
-            ...getV1Items(res, vaccinationChartColumns)
+            ...getVaccinationTotalItems(res, vaccinationTotalChartColumns)
+          ]
+          this.vaccinationDateData = [
+            ...getVaccinationDateItems(res, vaccinationDateChartColumns)
           ]
           this.caseTotalData = [...getCaseV2Items(res, caseChartColumns, true)]
           this.recoveryTotalData = [

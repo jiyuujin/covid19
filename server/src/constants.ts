@@ -19,5 +19,5 @@ export const severeTotalV1CSV =
   'https://www.mhlw.go.jp/content/severe_daily.csv'
 export const severeTotalV2CSV =
   'https://covid19.mhlw.go.jp/public/opendata/severe_cases_daily.csv'
-export const vaccinationSummaryCSV =
+export const vaccinationDateSummaryCSV =
   'https://vrs-data.cio.go.jp/vaccination/opendata/latest/summary_by_date.csv'
