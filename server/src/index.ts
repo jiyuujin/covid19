@@ -50,6 +50,6 @@ global.fetchSevereTotalDailyV2 = (): void => {
   Covid19Service.fetchSevereTotalDailyV2()
 }
 
-global.fetchVaccinationSummaryDaily = (): void => {
-  Covid19Service.fetchVaccinationSummaryDaily()
+global.fetchVaccinationDateSummaryDaily = (): void => {
+  Covid19Service.fetchVaccinationDateSummaryDaily()
 }

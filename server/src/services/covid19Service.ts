@@ -334,7 +334,7 @@ export class Covid19Service {
     }
   }
 
-  static fetchVaccinationSummaryDaily() {
+  static fetchVaccinationDateSummaryDaily() {
     const res = ApiService.getApi(vaccinationDateSummaryCSV)
     const resData = res.getContentText()
     const items = convertCsv(resData)
