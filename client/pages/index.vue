@@ -234,11 +234,13 @@ import { prefectures } from '~/services/japan'
 
 import LoadingSvg from '~/static/loading.svg'
 
+const PrefectureSelect = () => import('~/components/PrefectureSelect.vue')
 const GoogleChart = () => import('~/components/GoogleChart.vue')
 
 export default Vue.extend({
   components: {
     LoadingSvg,
+    PrefectureSelect,
     GoogleChart
   },
   data() {
