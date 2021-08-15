@@ -16,12 +16,16 @@ import {
   severeTotalV2CSV,
   testedCSV,
   vaccinationDateSummaryCSV,
+  vaccinationPrefectureSummaryCSV,
   SLACK_INCOMING_API
 } from '~/constants'
 
 const ss = SpreadsheetApp.openById(SPREADSHEET_NAME)
 const sheetV1 = ss.getSheetByName('v1_main')
 const sheetVaccinationDate = ss.getSheetByName('vaccination_date_main')
+const sheetVaccinationPrefecture = ss.getSheetByName(
+  'vaccination_prefecture_main'
+)
 const sheetPositiveV2 = ss.getSheetByName('v2_positive_main')
 const sheetCaseV2 = ss.getSheetByName('v2_case_main')
 const sheetDeathV2 = ss.getSheetByName('v2_death_main')
@@ -341,6 +345,25 @@ export class Covid19Service {
 
     try {
       sheetVaccinationDate
+        .getRange(1, 1, items.length, items[0].length)
+        .setValues(items)
+    } catch (err) {
+      SlackService.sendMessage(
+        SLACK_INCOMING_API,
+        JSON.stringify({
+          text: `ワクチン接種者の数を取得しました - ${err}`
+        })
+      )
+    }
+  }
+
+  static fetchVaccinationPrefectureSummaryDaily() {
+    const res = ApiService.getApi(vaccinationPrefectureSummaryCSV)
+    const resData = res.getContentText()
+    const items = convertCsv(resData)
+
+    try {
+      sheetVaccinationPrefecture
         .getRange(1, 1, items.length, items[0].length)
         .setValues(items)
     } catch (err) {

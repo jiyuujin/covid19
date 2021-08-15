@@ -97,12 +97,16 @@
       </div>
     </div>
 
-    <h3 id="vaccinationDate" class="subtitle">
-      <a href="/#vaccinationDate">{{ `ワクチン接種数` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `API V1` }}
-      </span>
-    </h3>
+    <h4 id="vaccinationDate" class="subtitle">
+      {{ `回数別` }}
+    </h4>
+    <div v-if="prefecture !== 0">
+      <h5>{{ prefectureName }}</h5>
+      <div v-if="prefectureData">
+        <p>{{ `1回目 ${prefectureData[1]}` }}</p>
+        <p>{{ `2回目 ${prefectureData[2]}` }}</p>
+      </div>
+    </div>
     <div class="grid">
       <div class="grid_list">
         <div v-if="vaccinationDateData.length !== 0" class="info">
@@ -225,6 +229,7 @@ import {
   getV1Items,
   getVaccinationTotalItems,
   getVaccinationDateItems,
+  getVaccinationPrefectureItems,
   getPositiveV2Items,
   getCaseV2Items,
   getDeathV2Items,
@@ -249,6 +254,7 @@ export default Vue.extend({
       testedTotalData: [] as Array<Array<Date | string | number>>,
       vaccinationTotalData: [] as Array<Array<Date | string | number>>,
       vaccinationDateData: [] as Array<Array<Date | string | number>>,
+      vaccinationPrefectureData: [] as Array<Array<Date | string | number>>,
       caseTotalData: [] as Array<Array<Date | string | number>>,
       recoveryTotalData: [] as Array<Array<Date | string | number>>,
       deathTotalData: [] as Array<Array<Date | string | number>>,
@@ -263,6 +269,15 @@ export default Vue.extend({
       deathTotalOptions: deathChartOptions,
       severeTotalOptions: severeChartOptions,
       prefectures: prefectures
+    }
+  },
+  computed: {
+    prefectureName(): string {
+      return this.prefectures.filter((p) => p.value === this.prefecture)[0]
+        .label
+    },
+    prefectureData(): Array<Date | string | number> | null {
+      return this.vaccinationPrefectureData[1] || null
     }
   },
   watch: {
@@ -287,6 +302,7 @@ export default Vue.extend({
       this.testedTotalData = []
       this.vaccinationTotalData = []
       this.vaccinationDateData = []
+      this.vaccinationPrefectureData = []
       this.caseTotalData = []
       this.recoveryTotalData = []
       this.deathTotalData = []
@@ -294,7 +310,10 @@ export default Vue.extend({
     },
     async fetchResponse(prefecture: string) {
       await this.$repositories.cr
-        .get(prefecture)
+        .get(
+          prefecture,
+          prefectures.filter((p) => p.text === prefecture)[0].value
+        )
         .then((res: any) => {
           this.positiveTotalData = [
             ...getPositiveV2Items(res, positiveChartColumns)
@@ -305,6 +324,9 @@ export default Vue.extend({
           ]
           this.vaccinationDateData = [
             ...getVaccinationDateItems(res, vaccinationDateChartColumns)
+          ]
+          this.vaccinationPrefectureData = [
+            ...getVaccinationPrefectureItems(res, vaccinationDateChartColumns)
           ]
           this.caseTotalData = [...getCaseV2Items(res, caseChartColumns, true)]
           this.recoveryTotalData = [
