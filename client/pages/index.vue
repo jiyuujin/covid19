@@ -345,9 +345,7 @@ export default Vue.extend({
           prefectures.filter((p) => p.text === prefecture)[0].value
         )
         .then((res: any) => {
-          this.emergencyDeclarationData = [
-            ...getEmergencyDeclarationItems(res)
-          ]
+          this.emergencyDeclarationData = [...getEmergencyDeclarationItems(res)]
           this.preventionDeclarationData = [
             ...getPreventionDeclarationItems(res)
           ]
