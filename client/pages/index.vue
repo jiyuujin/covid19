@@ -25,6 +25,30 @@
       </a>
     </h3>
 
+    <div
+      v-if="emergencyDeclarationData.length !== 0"
+      class="alert-block alert-block_error"
+    >
+      <p>緊急事態宣言</p>
+      <span v-for="p in emergencyDeclarationData" :key="p">
+        <span class="tag" :style="{ marginLeft: '8px' }">
+          {{ p }}
+        </span>
+      </span>
+    </div>
+
+    <div
+      v-if="preventionDeclarationData.length !== 0"
+      class="alert-block alert-block_warning"
+    >
+      <p>まん延防止等重点措置</p>
+      <span v-for="p in preventionDeclarationData" :key="p">
+        <span class="tag" :style="{ marginLeft: '8px' }">
+          {{ p }}
+        </span>
+      </span>
+    </div>
+
     <h2>データ</h2>
     <h3 class="subtitle">
       {{ `都道府県` }}
@@ -226,6 +250,8 @@ import {
   severeChartColumns
 } from '~/services/chartColumns'
 import {
+  getEmergencyDeclarationItems,
+  getPreventionDeclarationItems,
   getV1Items,
   getVaccinationTotalItems,
   getVaccinationDateItems,
@@ -250,6 +276,8 @@ export default Vue.extend({
   },
   data() {
     return {
+      emergencyDeclarationData: [] as Array<Array<Date | string | number>>,
+      preventionDeclarationData: [] as Array<Array<Date | string | number>>,
       positiveTotalData: [] as Array<Array<Date | string | number>>,
       testedTotalData: [] as Array<Array<Date | string | number>>,
       vaccinationTotalData: [] as Array<Array<Date | string | number>>,
@@ -298,6 +326,8 @@ export default Vue.extend({
       this.prefecture = val
     },
     reset() {
+      this.emergencyDeclarationData = []
+      this.preventionDeclarationData = []
       this.positiveTotalData = []
       this.testedTotalData = []
       this.vaccinationTotalData = []
@@ -315,6 +345,12 @@ export default Vue.extend({
           prefectures.filter((p) => p.text === prefecture)[0].value
         )
         .then((res: any) => {
+          this.emergencyDeclarationData = [
+            ...getEmergencyDeclarationItems(res)
+          ]
+          this.preventionDeclarationData = [
+            ...getPreventionDeclarationItems(res)
+          ]
           this.positiveTotalData = [
             ...getPositiveV2Items(res, positiveChartColumns)
           ]

@@ -1,3 +1,24 @@
+export const getEmergencyDeclarationItems = (res: any) => {
+  let result: Array<Array<Date | string | number>> = []
+  for (const item of res.declarationData) {
+    console.log(item)
+    if (item['emergency_flag'] === 'true') {
+      result.push(item['prefecture_name'])
+    }
+  }
+  return result
+}
+
+export const getPreventionDeclarationItems = (res: any) => {
+  let result: Array<Array<Date | string | number>> = []
+  for (const item of res.declarationData) {
+    if (item['prevention_flag'] === 'true') {
+      result.push(item['prefecture_name'])
+    }
+  }
+  return result
+}
+
 export const getV1Items = (res: any, columns: string[]) => {
   let result: Array<Array<Date | string | number>> = [columns]
   for (const item of res.v1data) {
