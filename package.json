@@ -7,6 +7,7 @@
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
+    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
     "lint": "eslint --ext vue,ts --ignore-path .gitignore .",
     "lint:fix": "eslint --ext vue,ts --ignore-path .gitignore . --fix",
     "test": "jest",
@@ -31,6 +32,7 @@
     "core-js": "^3.6.5",
     "eslint": "^7.10.0",
     "jest": "^26.5.0",
+    "prettier": "^2.3.2",
     "ts-jest": "^26.4.1",
     "vue-jest": "^3.0.4"
   }
