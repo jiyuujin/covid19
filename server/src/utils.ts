@@ -1,3 +1,5 @@
+import Encoding from 'encoding-japanese'
+
 /**
  * プロパティ値を設定する
  * @param key
@@ -35,3 +37,13 @@ export const convertCsv = (
 ): Array<unknown | Array<unknown> | any> => {
   return Utilities.parseCsv(data)
 }
+
+/**
+ * CSVを取得する (文字化け)
+ * @param data
+ */
+// export const convertCsvWithSJIS = (
+//   data: string
+// ): Array<unknown | Array<unknown> | any> => {
+//   return Utilities.parseCsv(Encoding.convert(data, 'SJIS'))
+// }

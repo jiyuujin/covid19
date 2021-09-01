@@ -17,7 +17,7 @@ import {
   testedCSV,
   vaccinationDateSummaryCSV,
   vaccinationPrefectureSummaryCSV,
-  SLACK_INCOMING_API
+  SLACK_INCOMING_API,
 } from '~/constants'
 
 const ss = SpreadsheetApp.openById(SPREADSHEET_NAME)
@@ -46,7 +46,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `陽性者数 (V1) を取得しました - ${err}`
+          text: `陽性者数 (V1) を取得しました - ${err}`,
         })
       )
     }
@@ -68,7 +68,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `陽性者数 (V2) を取得しました - ${err}`
+          text: `陽性者数 (V2) を取得しました - ${err}`,
         })
       )
     }
@@ -108,7 +108,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `実施人数を取得しました - ${err}`
+          text: `実施人数を取得しました - ${err}`,
         })
       )
     }
@@ -148,7 +148,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `入院治療等を要する者の数を取得しました - ${err}`
+          text: `入院治療等を要する者の数を取得しました - ${err}`,
         })
       )
     }
@@ -168,7 +168,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `入院治療等を要する者の数 (V2) を取得しました - ${err}`
+          text: `入院治療等を要する者の数 (V2) を取得しました - ${err}`,
         })
       )
     }
@@ -208,7 +208,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `退院又は療養解除となった者の数を取得しました - ${err}`
+          text: `退院又は療養解除となった者の数を取得しました - ${err}`,
         })
       )
     }
@@ -248,7 +248,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `死亡者の数を取得しました - ${err}`
+          text: `死亡者の数を取得しました - ${err}`,
         })
       )
     }
@@ -270,7 +270,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `死亡者の数 (V2) を取得しました - ${err}`
+          text: `死亡者の数 (V2) を取得しました - ${err}`,
         })
       )
     }
@@ -310,7 +310,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `重症者の数を取得しました - ${err}`
+          text: `重症者の数を取得しました - ${err}`,
         })
       )
     }
@@ -332,7 +332,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `重症者の数 (V2) を取得しました - ${err}`
+          text: `重症者の数 (V2) を取得しました - ${err}`,
         })
       )
     }
@@ -351,7 +351,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `ワクチン接種者の数を取得しました - ${err}`
+          text: `ワクチン接種者の数を取得しました - ${err}`,
         })
       )
     }
@@ -370,7 +370,7 @@ export class Covid19Service {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
-          text: `ワクチン接種者の数を取得しました - ${err}`
+          text: `ワクチン接種者の数を取得しました - ${err}`,
         })
       )
     }

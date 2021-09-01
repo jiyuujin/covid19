@@ -9,7 +9,7 @@ export class ApiService {
       method: 'post',
       contentType: 'application/json',
       muteHttpExceptions: true,
-      payload: payload
+      payload: payload,
     })
   }
 
@@ -19,7 +19,7 @@ export class ApiService {
    */
   static getApi(api: string) {
     return UrlFetchApp.fetch(api, {
-      muteHttpExceptions: true
+      muteHttpExceptions: true,
     })
   }
 }

@@ -12,23 +12,23 @@ export default {
     title: 'top',
     meta: [
       {
-        charset: 'utf-8'
+        charset: 'utf-8',
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width, initial-scale=1',
       },
       ...generalOg(),
-      ...twitterOg()
+      ...twitterOg(),
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   css: [
     {
       src: '~/assets/main.scss',
-      lang: 'css'
-    }
+      lang: 'css',
+    },
   ],
 
   components: true,
@@ -45,22 +45,22 @@ export default {
         [
           '@babel/plugin-proposal-private-methods',
           {
-            loose: true
-          }
-        ]
-      ]
+            loose: true,
+          },
+        ],
+      ],
     },
     loaders: {
       scss: {
         implementation: sass,
         sassOptions: {
-          fiber
-        }
-      }
-    }
+          fiber,
+        },
+      },
+    },
   },
 
   env: {
-    NUXT_COVID19_API: process.env.NUXT_COVID19_API
-  }
+    NUXT_COVID19_API: process.env.NUXT_COVID19_API,
+  },
 }

@@ -4,20 +4,20 @@ export const testedChartColumns: string[] = ['日付', 'PCR 検査実施件数(�
 
 export const vaccinationTotalChartColumns: string[] = [
   '日付',
-  'ワクチン接種数累計'
+  'ワクチン接種数累計',
 ]
 
 export const vaccinationDateChartColumns: string[] = [
   '日付',
   'ワクチン接種数 (1回目)',
-  'ワクチン接種数 (2回目)'
+  'ワクチン接種数 (2回目)',
 ]
 
 export const caseChartColumns: string[] = ['日付', '入院治療を要する者']
 
 export const recoveryChartColumns: string[] = [
   '日付',
-  '退院、療養解除となった者'
+  '退院、療養解除となった者',
 ]
 
 export const deathChartColumns: string[] = ['日付', '死亡者数']

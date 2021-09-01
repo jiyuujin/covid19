@@ -8,40 +8,40 @@ export const generalOg = (
     name: 'description',
     content: description
       ? description
-      : '厚生労働省や首相官邸のオープンデータを利用して、新型コロナウイルスの現況を可視化しています。'
+      : '厚生労働省や首相官邸のオープンデータを利用して、新型コロナウイルスの現況を可視化しています。',
   },
   {
     hid: 'og:site_name',
     name: 'og:site_name',
-    content: title ? title : '新型コロナウイルスの現況'
+    content: title ? title : '新型コロナウイルスの現況',
   },
   {
     hid: 'og:type',
     name: 'og:type',
-    content: 'website'
+    content: 'website',
   },
   {
     hid: 'og:description',
     name: 'og:description',
     content: description
       ? description
-      : '厚生労働省や首相官邸のオープンデータを利用して、新型コロナウイルスの現況を可視化しています。'
+      : '厚生労働省や首相官邸のオープンデータを利用して、新型コロナウイルスの現況を可視化しています。',
   },
   {
     hid: 'og:title',
     name: 'og:title',
-    content: title ? title : '新型コロナウイルスの現況'
+    content: title ? title : '新型コロナウイルスの現況',
   },
   {
     hid: 'og:url',
     name: 'og:url',
-    content: url ? url : 'https://webneko.dev/'
+    content: url ? url : 'https://webneko.dev/',
   },
   {
     hid: 'og:image',
     name: 'og:image',
-    content: '/icon/heart.png'
-  }
+    content: '/icon/heart.png',
+  },
 ]
 
 export const twitterOg = (title?: string, description?: string) => [
@@ -50,36 +50,36 @@ export const twitterOg = (title?: string, description?: string) => [
     name: 'twitter:description',
     content: description
       ? description
-      : '厚生労働省や首相官邸のオープンデータを利用して、新型コロナウイルスの現況を可視化しています。'
+      : '厚生労働省や首相官邸のオープンデータを利用して、新型コロナウイルスの現況を可視化しています。',
   },
   {
     hid: 'twitter:title',
     name: 'twitter:title',
-    content: title ? title : '新型コロナウイルスの現況'
+    content: title ? title : '新型コロナウイルスの現況',
   },
   {
     hid: 'twitter:card',
     name: 'twitter:card',
-    content: 'summary' // ex: summary, summary_large_image
+    content: 'summary', // ex: summary, summary_large_image
   },
   {
     hid: 'twitter:site',
     name: 'twitter:site',
-    content: '@jiyuujinlab'
+    content: '@jiyuujinlab',
   },
   {
     hid: 'twitter:creator',
     name: 'twitter:creator',
-    content: '@jiyuujinlab'
+    content: '@jiyuujinlab',
   },
   {
     hid: 'twitter:site',
     name: 'twitter:site',
-    content: '@jiyuujinlab'
+    content: '@jiyuujinlab',
   },
   {
     hid: 'twitter:image',
     name: 'twitter:image',
-    content: '/icon/heart.png'
-  }
+    content: '/icon/heart.png',
+  },
 ]
