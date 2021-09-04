@@ -23,9 +23,7 @@ import {
 const ss = SpreadsheetApp.openById(SPREADSHEET_NAME)
 const sheetV1 = ss.getSheetByName('v1_main')
 const sheetVaccinationDate = ss.getSheetByName('vaccination_date_main')
-const sheetVaccinationPrefecture = ss.getSheetByName(
-  'vaccination_prefecture_main'
-)
+const sheetVaccinationPrefecture = ss.getSheetByName('vaccination_prefecture_main')
 const sheetPositiveV2 = ss.getSheetByName('v2_positive_main')
 const sheetCaseV2 = ss.getSheetByName('v2_case_main')
 const sheetDeathV2 = ss.getSheetByName('v2_death_main')
@@ -47,7 +45,7 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `陽性者数 (V1) を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -61,15 +59,13 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      sheetPositiveV2
-        .getRange(1, 1, items.length, items[0].length)
-        .setValues(items)
+      sheetPositiveV2.getRange(1, 1, items.length, items[0].length).setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `陽性者数 (V2) を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -86,10 +82,8 @@ export class Covid19Service {
       for (let index = 0; index < 30; index++) {
         const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
-          new Date(startDate).getFullYear() ===
-            new Date(items[1][0]).getFullYear() &&
-          new Date(startDate).getMonth() + 1 ===
-            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getFullYear() === new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 === new Date(items[1][0]).getMonth() + 1 &&
           new Date(startDate).getDate() === new Date(items[1][0]).getDate()
         ) {
           const mapItems = items.map((item, key) => {
@@ -109,7 +103,7 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `実施人数を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -126,10 +120,8 @@ export class Covid19Service {
       for (let index = 0; index < 30; index++) {
         const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
-          new Date(startDate).getFullYear() ===
-            new Date(items[1][0]).getFullYear() &&
-          new Date(startDate).getMonth() + 1 ===
-            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getFullYear() === new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 === new Date(items[1][0]).getMonth() + 1 &&
           new Date(startDate).getDate() === new Date(items[1][0]).getDate()
         ) {
           const mapItems = items.map((item, key) => {
@@ -149,7 +141,7 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `入院治療等を要する者の数を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -169,7 +161,7 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `入院治療等を要する者の数 (V2) を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -186,10 +178,8 @@ export class Covid19Service {
       for (let index = 0; index < 30; index++) {
         const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
-          new Date(startDate).getFullYear() ===
-            new Date(items[1][0]).getFullYear() &&
-          new Date(startDate).getMonth() + 1 ===
-            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getFullYear() === new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 === new Date(items[1][0]).getMonth() + 1 &&
           new Date(startDate).getDate() === new Date(items[1][0]).getDate()
         ) {
           const mapItems = items.map((item, key) => {
@@ -209,7 +199,7 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `退院又は療養解除となった者の数を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -226,10 +216,8 @@ export class Covid19Service {
       for (let index = 0; index < 40; index++) {
         const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
-          new Date(startDate).getFullYear() ===
-            new Date(items[1][0]).getFullYear() &&
-          new Date(startDate).getMonth() + 1 ===
-            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getFullYear() === new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 === new Date(items[1][0]).getMonth() + 1 &&
           new Date(startDate).getDate() === new Date(items[1][0]).getDate()
         ) {
           const mapItems = items.map((item, key) => {
@@ -249,7 +237,7 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `死亡者の数を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -263,15 +251,13 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      sheetDeathV2
-        .getRange(1, 1, items.length, items[0].length)
-        .setValues(items)
+      sheetDeathV2.getRange(1, 1, items.length, items[0].length).setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `死亡者の数 (V2) を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -288,10 +274,8 @@ export class Covid19Service {
       for (let index = 0; index < 30; index++) {
         const startDate = sheetV1.getRange(1 + index, 1).getValue()
         if (
-          new Date(startDate).getFullYear() ===
-            new Date(items[1][0]).getFullYear() &&
-          new Date(startDate).getMonth() + 1 ===
-            new Date(items[1][0]).getMonth() + 1 &&
+          new Date(startDate).getFullYear() === new Date(items[1][0]).getFullYear() &&
+          new Date(startDate).getMonth() + 1 === new Date(items[1][0]).getMonth() + 1 &&
           new Date(startDate).getDate() === new Date(items[1][0]).getDate()
         ) {
           const mapItems = items.map((item, key) => {
@@ -311,7 +295,7 @@ export class Covid19Service {
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `重症者の数を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -325,15 +309,13 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      sheetSevereV2
-        .getRange(1, 1, items.length, items[0].length)
-        .setValues(items)
+      sheetSevereV2.getRange(1, 1, items.length, items[0].length).setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `重症者の数 (V2) を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -344,15 +326,13 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      sheetVaccinationDate
-        .getRange(1, 1, items.length, items[0].length)
-        .setValues(items)
+      sheetVaccinationDate.getRange(1, 1, items.length, items[0].length).setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `ワクチン接種者の数を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }
@@ -363,15 +343,13 @@ export class Covid19Service {
     const items = convertCsv(resData)
 
     try {
-      sheetVaccinationPrefecture
-        .getRange(1, 1, items.length, items[0].length)
-        .setValues(items)
+      sheetVaccinationPrefecture.getRange(1, 1, items.length, items[0].length).setValues(items)
     } catch (err) {
       SlackService.sendMessage(
         SLACK_INCOMING_API,
         JSON.stringify({
           text: `ワクチン接種者の数を取得しました - ${err}`,
-        })
+        }),
       )
     }
   }

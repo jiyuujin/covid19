@@ -339,7 +339,6 @@ export default Vue.extend({
       this.severeTotalData = []
     },
     async fetchResponse(prefecture: string) {
-      // @ts-ignore
       await this.$repositories.cr
         .get(
           prefecture,

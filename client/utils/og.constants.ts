@@ -1,8 +1,4 @@
-export const generalOg = (
-  title?: string,
-  description?: string,
-  url?: string
-) => [
+export const generalOg = (title?: string, description?: string, url?: string) => [
   {
     hid: 'description',
     name: 'description',

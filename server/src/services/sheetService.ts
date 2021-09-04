@@ -41,11 +41,7 @@ export class SheetService {
    * @param row 指定の行
    * @param column 指定の列
    */
-  static getSpecifiedDataOnRange(
-    sheet: Sheet,
-    row: number,
-    column: number
-  ): string | object {
+  static getSpecifiedDataOnRange(sheet: Sheet, row: number, column: number): string | object {
     const range = sheet.getRange(row, column)
     return range.getValue()
   }
@@ -56,11 +52,7 @@ export class SheetService {
    * @param row 指定の行
    * @param column 指定の列
    */
-  static getCoordinateDataOnRange(
-    sheet: Sheet,
-    row: number,
-    column: number
-  ): string | object {
+  static getCoordinateDataOnRange(sheet: Sheet, row: number, column: number): string | object {
     const range = sheet.getRange(row, column)
     return range.getValue()
   }
@@ -72,12 +64,7 @@ export class SheetService {
    * @param column 指定の列
    * @param data 指定のデータ
    */
-  static updateSpecifiedDataToRange(
-    sheet: Sheet,
-    row: number,
-    column: number,
-    data: string
-  ): void {
+  static updateSpecifiedDataToRange(sheet: Sheet, row: number, column: number, data: string): void {
     const range = sheet.getRange(row, column)
     range.setValue(data)
   }
@@ -93,7 +80,7 @@ export class SheetService {
     sheet: Sheet,
     row: number,
     column: number,
-    data: string
+    data: string,
   ): void {
     const range = sheet.getRange(row, column)
     range.setValue(data)

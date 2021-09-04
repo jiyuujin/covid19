@@ -32,9 +32,7 @@ export const getDayFormat = (date = new Date()): string => {
  * CSVを取得する
  * @param data
  */
-export const convertCsv = (
-  data: string
-): Array<unknown | Array<unknown> | any> => {
+export const convertCsv = (data: string): Array<unknown | Array<unknown> | any> => {
   return Utilities.parseCsv(data)
 }
 

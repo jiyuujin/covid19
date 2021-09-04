@@ -15,7 +15,13 @@
       "~/*": ["./client/*"],
       "@/*": ["./client/*"]
     },
-    "types": ["@types/node", "@types/jest", "@nuxt/types", "@nuxt/http"]
+    "types": [
+      "@types/node",
+      "@types/jest",
+      "@nuxt/types",
+      "@nuxt/http",
+      "client/types/shims-vue.d.ts"
+    ]
   },
   "exclude": ["node_modules", ".nuxt", "dist", "server"]
 }
