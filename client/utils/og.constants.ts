@@ -1,3 +1,5 @@
+import Endpoints from './endpoint.constants'
+
 export const generalOg = (title?: string, description?: string, url?: string) => [
   {
     hid: 'description',
@@ -36,7 +38,7 @@ export const generalOg = (title?: string, description?: string, url?: string) =>
   {
     hid: 'og:image',
     name: 'og:image',
-    content: '/icon/heart.png',
+    content: `${Endpoints.DOMAIN}/ogp.jpg`,
   },
 ]
 
@@ -56,7 +58,7 @@ export const twitterOg = (title?: string, description?: string) => [
   {
     hid: 'twitter:card',
     name: 'twitter:card',
-    content: 'summary', // ex: summary, summary_large_image
+    content: 'summary_large_image', // ex: summary, summary_large_image
   },
   {
     hid: 'twitter:site',
@@ -76,6 +78,6 @@ export const twitterOg = (title?: string, description?: string) => [
   {
     hid: 'twitter:image',
     name: 'twitter:image',
-    content: '/icon/heart.png',
+    content: `${Endpoints.DOMAIN}/ogp.jpg`,
   },
 ]
