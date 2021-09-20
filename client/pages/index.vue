@@ -124,14 +124,7 @@
     <h4 id="vaccinationDate" class="subtitle">
       {{ `回数別` }}
     </h4>
-    <div v-if="prefecture !== 0">
-      <h5>{{ prefectureName }}</h5>
-      <div v-if="prefectureData">
-        <p>{{ `1回目 ${prefectureData[1]}` }}</p>
-        <p>{{ `2回目 ${prefectureData[2]}` }}</p>
-      </div>
-    </div>
-    <div class="grid">
+    <div v-if="prefecture === 0" class="grid">
       <div class="grid_list">
         <div v-if="vaccinationDateData.length !== 0" class="info">
           <google-chart
