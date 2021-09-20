@@ -73,7 +73,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="positiveTotalData"
-            :chart-options="positiveTotalOptions"
+            :chart-options="positiveChartOptions"
             class="chart"
           />
         </div>
@@ -93,7 +93,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="testedTotalData"
-            :chart-options="testedTotalOptions"
+            :chart-options="testedChartOptions"
             class="chart"
           />
         </div>
@@ -113,7 +113,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="vaccinationTotalData"
-            :chart-options="vaccinationOptions"
+            :chart-options="vaccinationChartOptions"
             class="chart"
           />
         </div>
@@ -130,7 +130,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="vaccinationDateData"
-            :chart-options="vaccinationOptions"
+            :chart-options="vaccinationChartOptions"
             class="chart"
           />
         </div>
@@ -150,7 +150,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="recoveryTotalData"
-            :chart-options="recoveryTotalOptions"
+            :chart-options="recoveryChartOptions"
             class="chart"
           />
         </div>
@@ -170,7 +170,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="caseTotalData"
-            :chart-options="caseTotalOptions"
+            :chart-options="caseChartOptions"
             class="chart"
           />
         </div>
@@ -190,7 +190,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="deathTotalData"
-            :chart-options="deathTotalOptions"
+            :chart-options="deathChartOptions"
             class="chart"
           />
         </div>
@@ -210,7 +210,7 @@
           <google-chart
             chart-type="ColumnChart"
             :chart-data="severeTotalData"
-            :chart-options="severeTotalOptions"
+            :chart-options="severeChartOptions"
             class="chart"
           />
         </div>
@@ -221,7 +221,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent, ref, computed, watch, useContext, onMounted } from '@nuxtjs/composition-api'
 
 import {
   positiveChartOptions,
@@ -261,111 +261,119 @@ import LoadingSvg from '~/static/loading.svg'
 const PrefectureSelect = () => import('~/components/PrefectureSelect.vue')
 const GoogleChart = () => import('~/components/GoogleChart.vue')
 
-export default Vue.extend({
+type IData = Array<Array<string | number | Date>> | undefined
+
+export default defineComponent({
   components: {
     LoadingSvg,
     PrefectureSelect,
     GoogleChart
   },
-  data() {
-    return {
-      emergencyDeclarationData: [] as Array<Array<Date | string | number>>,
-      preventionDeclarationData: [] as Array<Array<Date | string | number>>,
-      positiveTotalData: [] as Array<Array<Date | string | number>>,
-      testedTotalData: [] as Array<Array<Date | string | number>>,
-      vaccinationTotalData: [] as Array<Array<Date | string | number>>,
-      vaccinationDateData: [] as Array<Array<Date | string | number>>,
-      vaccinationPrefectureData: [] as Array<Array<Date | string | number>>,
-      caseTotalData: [] as Array<Array<Date | string | number>>,
-      recoveryTotalData: [] as Array<Array<Date | string | number>>,
-      deathTotalData: [] as Array<Array<Date | string | number>>,
-      severeTotalData: [] as Array<Array<Date | string | number>>,
-      updatedAt: '' as string,
-      prefecture: 0 as number,
-      positiveTotalOptions: positiveChartOptions,
-      testedTotalOptions: testedChartOptions,
-      vaccinationOptions: vaccinationChartOptions,
-      caseTotalOptions: caseChartOptions,
-      recoveryTotalOptions: recoveryChartOptions,
-      deathTotalOptions: deathChartOptions,
-      severeTotalOptions: severeChartOptions,
-      prefectures: prefectures
+  setup() {
+    const { $http } = useContext()
+    const emergencyDeclarationData = ref<IData>([])
+    const preventionDeclarationData = ref<IData>([])
+    const positiveTotalData = ref<IData>([])
+    const testedTotalData = ref<IData>([])
+    const vaccinationTotalData = ref<IData>([])
+    const vaccinationDateData = ref<IData>([])
+    const vaccinationPrefectureData = ref<IData>([])
+    const caseTotalData = ref<IData>([])
+    const recoveryTotalData = ref<IData>([])
+    const deathTotalData = ref<IData>([])
+    const severeTotalData = ref<IData>([])
+    const updatedAt = ref<string>('')
+    const prefecture = ref<number>(0)
+    const prefectureName = computed(() => {
+      return prefectures.filter((p) => p.value === prefecture.value)[0].label
+    })
+    const handleSelect = (val: number) => {
+      prefecture.value = val
     }
-  },
-  computed: {
-    prefectureName(): string {
-      return this.prefectures.filter((p) => p.value === this.prefecture)[0]
-        .label
-    },
-    prefectureData(): Array<Date | string | number> | null {
-      return this.vaccinationPrefectureData[1] || null
+    const reset = () => {
+      emergencyDeclarationData.value = []
+      preventionDeclarationData.value = []
+      positiveTotalData.value = []
+      testedTotalData.value = []
+      vaccinationTotalData.value = []
+      vaccinationDateData.value = []
+      vaccinationPrefectureData.value = []
+      caseTotalData.value = []
+      recoveryTotalData.value = []
+      deathTotalData.value = []
+      severeTotalData.value = []
     }
-  },
-  watch: {
-    async prefecture() {
-      this.reset()
-      await this.fetchResponse(
-        this.prefectures.filter((p) => p.value === this.prefecture)[0].text
-      )
-    }
-  },
-  async mounted() {
-    await this.fetchResponse(
-      this.prefectures.filter((p) => p.value === this.prefecture)[0].text
-    )
-  },
-  methods: {
-    handleSelect(val: number) {
-      this.prefecture = val
-    },
-    reset() {
-      this.emergencyDeclarationData = []
-      this.preventionDeclarationData = []
-      this.positiveTotalData = []
-      this.testedTotalData = []
-      this.vaccinationTotalData = []
-      this.vaccinationDateData = []
-      this.vaccinationPrefectureData = []
-      this.caseTotalData = []
-      this.recoveryTotalData = []
-      this.deathTotalData = []
-      this.severeTotalData = []
-    },
-    async fetchResponse(prefecture: string) {
-      await this.$repositories.cr
-        .get(
-          prefecture,
-          prefectures.filter((p) => p.text === prefecture)[0].value
-        )
+    const fetchResponse = async (prefecture: string) => {
+      const prefectureCode = prefectures.filter((p) => p.text === prefecture)[0].value
+      await $http.$get(`${process.env.NUXT_COVID19_API}?prefecture=${prefecture!}&prefecture_code=${prefectureCode}`)
         .then((res: any) => {
-          this.emergencyDeclarationData = [...getEmergencyDeclarationItems(res)]
-          this.preventionDeclarationData = [
+          emergencyDeclarationData.value = [...getEmergencyDeclarationItems(res)]
+          preventionDeclarationData.value = [
             ...getPreventionDeclarationItems(res)
           ]
-          this.positiveTotalData = [
+          positiveTotalData.value = [
             ...getPositiveV2Items(res, positiveChartColumns)
           ]
-          this.testedTotalData = [...getV1Items(res, testedChartColumns)]
-          this.vaccinationTotalData = [
+          testedTotalData.value = [...getV1Items(res, testedChartColumns)]
+          vaccinationTotalData.value = [
             ...getVaccinationTotalItems(res, vaccinationTotalChartColumns)
           ]
-          this.vaccinationDateData = [
+          vaccinationDateData.value = [
             ...getVaccinationDateItems(res, vaccinationDateChartColumns)
           ]
-          this.vaccinationPrefectureData = [
+          vaccinationPrefectureData.value = [
             ...getVaccinationPrefectureItems(res, vaccinationDateChartColumns)
           ]
-          this.caseTotalData = [...getCaseV2Items(res, caseChartColumns, true)]
-          this.recoveryTotalData = [
+          caseTotalData.value = [...getCaseV2Items(res, caseChartColumns, true)]
+          recoveryTotalData.value = [
             ...getCaseV2Items(res, recoveryChartColumns, false)
           ]
-          this.deathTotalData = [...getDeathV2Items(res, deathChartColumns)]
-          this.severeTotalData = [...getSevereV2Items(res, severeChartColumns)]
-          this.updatedAt = res.updated_at
+          deathTotalData.value = [...getDeathV2Items(res, deathChartColumns)]
+          severeTotalData.value = [...getSevereV2Items(res, severeChartColumns)]
+          updatedAt.value = res.updated_at
         })
         .catch((err: any) => {
           console.error(err)
         })
+    }
+    watch(
+      prefecture,
+      async () => {
+        reset()
+        await fetchResponse(
+          prefectures.filter((p) => p.value === prefecture.value)[0].text
+        )
+      },
+    )
+    onMounted(async () => {
+      await fetchResponse(
+        prefectures.filter((p) => p.value === prefecture.value)[0].text
+      )
+    })
+    return {
+      positiveChartOptions,
+      testedChartOptions,
+      vaccinationChartOptions,
+      caseChartOptions,
+      recoveryChartOptions,
+      deathChartOptions,
+      severeChartOptions,
+      prefectures,
+      prefectureName,
+      handleSelect,
+      emergencyDeclarationData,
+      preventionDeclarationData,
+      positiveTotalData,
+      testedTotalData,
+      vaccinationTotalData,
+      vaccinationDateData,
+      vaccinationPrefectureData,
+      caseTotalData,
+      recoveryTotalData,
+      deathTotalData,
+      severeTotalData,
+      updatedAt,
+      prefecture,
     }
   }
 })
