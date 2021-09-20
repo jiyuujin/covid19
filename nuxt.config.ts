@@ -35,7 +35,7 @@ export default {
 
   plugins: ['~/plugins/repositories'],
 
-  buildModules: ['@nuxt/typescript-build'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api/module'],
 
   modules: ['@nuxt/http', '@nuxtjs/pwa', 'nuxt-svg-loader'],
 

@@ -17,6 +17,7 @@
   "dependencies": {
     "@nekohack/normalize.css": "^2.1.1",
     "@nuxt/http": "^0.6.2",
+    "@nuxtjs/composition-api": "^0.29.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.3.5",
     "nuxt": "^2.14.6",
