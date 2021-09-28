@@ -25,27 +25,27 @@
       </a>
     </h3>
 
-    <div
-      v-if="emergencyDeclarationData.length !== 0"
-      class="alert-block alert-block_error"
-    >
+    <div class="alert-block alert-block_error">
       <p>緊急事態宣言</p>
       <span v-for="p in emergencyDeclarationData" :key="p">
         <span class="tag" :style="{ marginLeft: '8px' }">
           {{ p }}
         </span>
       </span>
+      <span v-if="emergencyDeclarationData.length === 0">
+        {{ `発出されている都道府県はありません` }}
+      </span>
     </div>
 
-    <div
-      v-if="preventionDeclarationData.length !== 0"
-      class="alert-block alert-block_warning"
-    >
+    <div class="alert-block alert-block_warning">
       <p>まん延防止等重点措置</p>
       <span v-for="p in preventionDeclarationData" :key="p">
         <span class="tag" :style="{ marginLeft: '8px' }">
           {{ p }}
         </span>
+      </span>
+      <span v-if="preventionDeclarationData.length === 0">
+        {{ `発出されている都道府県はありません` }}
       </span>
     </div>
 
