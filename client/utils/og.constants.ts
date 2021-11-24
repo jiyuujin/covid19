@@ -38,7 +38,7 @@ export const generalOg = (title?: string, description?: string, url?: string) =>
   {
     hid: 'og:image',
     name: 'og:image',
-    content: `${Endpoints.DOMAIN}/ogp.jpg`,
+    content: `${Endpoints.DOMAIN}/top.jpg`,
   },
 ]
 
@@ -78,6 +78,6 @@ export const twitterOg = (title?: string, description?: string) => [
   {
     hid: 'twitter:image',
     name: 'twitter:image',
-    content: `${Endpoints.DOMAIN}/ogp.jpg`,
+    content: `${Endpoints.DOMAIN}/top.jpg`,
   },
 ]

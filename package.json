@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
+    "build:og-gen": "ts-node scripts/og-gen.ts",
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
@@ -40,9 +41,11 @@
     "fibers": "^5.0.0",
     "jest": "^26.5.0",
     "prettier": "^2.3.2",
+    "puppeteer": "^11.0.0",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
     "ts-jest": "^26.4.1",
+    "ts-node": "^10.4.0",
     "vue-jest": "^3.0.4"
   }
 }
