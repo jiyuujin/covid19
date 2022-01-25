@@ -95,7 +95,7 @@ export const getPositiveV2Items = (res: any, columns: string[]) => {
       if (key === 0) {
         temp.push(new Date(item['Date']))
       } else {
-        temp.push(Number(item['Newly confirmed cases']))
+        temp.push(Number(item['ALL']))
       }
     }
     result.push(temp)
@@ -112,9 +112,9 @@ export const getCaseV2Items = (res: any, columns: string[], requiredCare: boolea
         temp.push(new Date(item['Date']))
       } else if (key === 1) {
         if (requiredCare) {
-          temp.push(Number(item['Requiring inpatient care']))
+          temp.push(Number(item['(ALL) Requiring inpatient care']))
         } else {
-          temp.push(Number(item['Discharged from hospital or released from treatment']))
+          temp.push(Number(item['(ALL) Discharged from hospital or released from treatment']))
         }
       }
     }
@@ -131,7 +131,7 @@ export const getDeathV2Items = (res: any, columns: string[]) => {
       if (key === 0) {
         temp.push(new Date(item['Date']))
       } else if (key === 1) {
-        temp.push(Number(item['Deaths(Cumulative)']))
+        temp.push(Number(item['ALL']))
       }
     }
     result.push(temp)
@@ -147,7 +147,7 @@ export const getSevereV2Items = (res: any, columns: string[]) => {
       if (key === 0) {
         temp.push(new Date(item['Date']))
       } else if (key === 1) {
-        temp.push(Number(item['Severe cases']))
+        temp.push(Number(item['ALL']))
       }
     }
     result.push(temp)
