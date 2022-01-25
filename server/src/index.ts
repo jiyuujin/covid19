@@ -1,7 +1,10 @@
 import { SheetService } from './services/sheetService'
 import { Covid19Service } from '~/services/covid19Service'
+import { CollectionService } from '~/services/collectionService'
 
 import { getDayFormat } from './utils'
+
+const SHEET_ID = '1u5J3qblwoSjNl7KT3QyQa7R3lCAqfGctszZFUIYbozw'
 
 declare let global: any
 
@@ -56,4 +59,66 @@ global.fetchVaccinationDateSummaryDaily = (): void => {
 
 global.fetchVaccinationPrefectureSummaryDaily = (): void => {
   Covid19Service.fetchVaccinationPrefectureSummaryDaily()
+}
+
+global.doGet = (e): any => {
+  const now = new Date()
+
+  const v1data = CollectionService.getData(SHEET_ID, 'v1_main')
+  const declarationData = CollectionService.getData(SHEET_ID, 'declaration_main')
+  const vaccinationDateData = CollectionService.getData(SHEET_ID, 'vaccination_date_main')
+  const vaccinationPrefectureData = CollectionService.getData(
+    SHEET_ID,
+    'vaccination_prefecture_main',
+  )
+  const v2PositiveData = CollectionService.getData(SHEET_ID, 'v2_positive_main')
+  const v2CaseData = CollectionService.getData(SHEET_ID, 'v2_case_main')
+  const v2DeathData = CollectionService.getData(SHEET_ID, 'v2_death_main')
+  const v2SevereData = CollectionService.getData(SHEET_ID, 'v2_severe_main')
+  const prefectureData = CollectionService.getData(SHEET_ID, 'prefecture')
+  const updatedAt = Utilities.formatDate(
+    new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 23, 30),
+    'JST',
+    'yyyy/MM/dd HH:mm',
+  )
+
+  const out = ContentService.createTextOutput(
+    JSON.stringify(
+      {
+        //data: data,
+        v1data: v1data,
+        declarationData: declarationData,
+        vaccinationDateData: vaccinationDateData,
+        vaccinationPrefectureData: vaccinationPrefectureData,
+        v2PositiveData: v2PositiveData,
+        v2CaseData: v2CaseData,
+        v2DeathData: v2DeathData,
+        v2SevereData: v2SevereData,
+        prefecture: prefectureData,
+        updated_at: updatedAt,
+      },
+      null,
+      2,
+    ),
+  ).setMimeType(ContentService.MimeType.JSON)
+  out.setContent(
+    JSON.stringify(
+      {
+        //data: data,
+        v1data: v1data,
+        declarationData: declarationData,
+        vaccinationDateData: vaccinationDateData,
+        vaccinationPrefectureData: vaccinationPrefectureData,
+        v2PositiveData: v2PositiveData,
+        v2CaseData: v2CaseData,
+        v2DeathData: v2DeathData,
+        v2SevereData: v2SevereData,
+        prefecture: prefectureData,
+        updated_at: updatedAt,
+      },
+      null,
+      2,
+    ),
+  ) // JSONPテキストをセット
+  return out
 }
