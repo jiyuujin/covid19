@@ -305,7 +305,7 @@ export default defineComponent({
     }
     const fetchResponse = async (prefecture: string) => {
       const prefectureText = prefectures.filter((p) => p.text === prefecture)[0].text
-      await $http.$get(process.env.NUXT_COVID19_API)
+      await $http.$get(process.env.NUXT_COVID19_API!)
         .then((res: any) => {
           emergencyDeclarationData.value = [...getEmergencyDeclarationItems(res)]
           preventionDeclarationData.value = [
