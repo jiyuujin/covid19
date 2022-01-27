@@ -304,15 +304,15 @@ export default defineComponent({
       severeTotalData.value = []
     }
     const fetchResponse = async (prefecture: string) => {
-      const prefectureCode = prefectures.filter((p) => p.text === prefecture)[0].value
-      await $http.$get(`${process.env.NUXT_COVID19_API}?prefecture=${prefecture!}&prefecture_code=${prefectureCode}`)
+      const prefectureText = prefectures.filter((p) => p.text === prefecture)[0].text
+      await $http.$get(process.env.NUXT_COVID19_API)
         .then((res: any) => {
           emergencyDeclarationData.value = [...getEmergencyDeclarationItems(res)]
           preventionDeclarationData.value = [
             ...getPreventionDeclarationItems(res)
           ]
           positiveTotalData.value = [
-            ...getPositiveV2Items(res, positiveChartColumns)
+            ...getPositiveV2Items(res, positiveChartColumns, prefectureText)
           ]
           testedTotalData.value = [...getV1Items(res, testedChartColumns)]
           vaccinationTotalData.value = [
@@ -324,12 +324,12 @@ export default defineComponent({
           vaccinationPrefectureData.value = [
             ...getVaccinationPrefectureItems(res, vaccinationDateChartColumns)
           ]
-          caseTotalData.value = [...getCaseV2Items(res, caseChartColumns, true)]
+          caseTotalData.value = [...getCaseV2Items(res, caseChartColumns, true, prefectureText)]
           recoveryTotalData.value = [
-            ...getCaseV2Items(res, recoveryChartColumns, false)
+            ...getCaseV2Items(res, recoveryChartColumns, false, prefectureText)
           ]
-          deathTotalData.value = [...getDeathV2Items(res, deathChartColumns)]
-          severeTotalData.value = [...getSevereV2Items(res, severeChartColumns)]
+          deathTotalData.value = [...getDeathV2Items(res, deathChartColumns, prefectureText)]
+          severeTotalData.value = [...getSevereV2Items(res, severeChartColumns, prefectureText)]
           updatedAt.value = res.updated_at
         })
         .catch((err: any) => {

@@ -1,7 +1,6 @@
 export const getEmergencyDeclarationItems = (res: any) => {
   let result: Array<Array<Date | string | number>> = []
   for (const item of res.declarationData) {
-    console.log(item)
     if (item['emergency_flag'] === 'true') {
       result.push(item['prefecture_name'])
     }
@@ -87,7 +86,7 @@ export const getVaccinationPrefectureItems = (res: any, columns: string[]) => {
   return result
 }
 
-export const getPositiveV2Items = (res: any, columns: string[]) => {
+export const getPositiveV2Items = (res: any, columns: string[], prefectureText: string) => {
   let result: Array<Array<Date | string | number>> = [columns]
   for (const item of res.v2PositiveData) {
     let temp: Array<Date | string | number> = []
@@ -95,7 +94,7 @@ export const getPositiveV2Items = (res: any, columns: string[]) => {
       if (key === 0) {
         temp.push(new Date(item['Date']))
       } else {
-        temp.push(Number(item['ALL']))
+        temp.push(Number(item[prefectureText]))
       }
     }
     result.push(temp)
@@ -103,7 +102,12 @@ export const getPositiveV2Items = (res: any, columns: string[]) => {
   return result
 }
 
-export const getCaseV2Items = (res: any, columns: string[], requiredCare: boolean) => {
+export const getCaseV2Items = (
+  res: any,
+  columns: string[],
+  requiredCare: boolean,
+  prefectureText: string,
+) => {
   let result: Array<Array<Date | string | number>> = [columns]
   for (const item of res.v2CaseData) {
     let temp: Array<Date | string | number> = []
@@ -114,7 +118,9 @@ export const getCaseV2Items = (res: any, columns: string[], requiredCare: boolea
         if (requiredCare) {
           temp.push(Number(item['(ALL) Requiring inpatient care']))
         } else {
-          temp.push(Number(item['(ALL) Discharged from hospital or released from treatment']))
+          temp.push(
+            Number(item[`(${prefectureText}) Discharged from hospital or released from treatment`]),
+          )
         }
       }
     }
@@ -123,7 +129,7 @@ export const getCaseV2Items = (res: any, columns: string[], requiredCare: boolea
   return result
 }
 
-export const getDeathV2Items = (res: any, columns: string[]) => {
+export const getDeathV2Items = (res: any, columns: string[], prefectureText: string) => {
   let result: Array<Array<Date | string | number>> = [columns]
   for (const item of res.v2DeathData) {
     let temp: Array<Date | string | number> = []
@@ -131,7 +137,7 @@ export const getDeathV2Items = (res: any, columns: string[]) => {
       if (key === 0) {
         temp.push(new Date(item['Date']))
       } else if (key === 1) {
-        temp.push(Number(item['ALL']))
+        temp.push(Number(item[prefectureText]))
       }
     }
     result.push(temp)
@@ -139,7 +145,7 @@ export const getDeathV2Items = (res: any, columns: string[]) => {
   return result
 }
 
-export const getSevereV2Items = (res: any, columns: string[]) => {
+export const getSevereV2Items = (res: any, columns: string[], prefectureText: string) => {
   let result: Array<Array<Date | string | number>> = [columns]
   for (const item of res.v2SevereData) {
     let temp: Array<Date | string | number> = []
@@ -147,7 +153,7 @@ export const getSevereV2Items = (res: any, columns: string[]) => {
       if (key === 0) {
         temp.push(new Date(item['Date']))
       } else if (key === 1) {
-        temp.push(Number(item['ALL']))
+        temp.push(Number(item[prefectureText]))
       }
     }
     result.push(temp)
