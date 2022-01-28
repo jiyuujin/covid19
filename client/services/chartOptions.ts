@@ -7,8 +7,8 @@ if (process.browser) {
 
 const chartColors = ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
 
-const backgroundColor = isDark ? '#303030' : '#fff'
-const textColor = isDark ? '#fff' : '#000'
+const backgroundColor = isDark ? '#4d4d4d' : '#fefefe'
+const textColor = isDark ? '#f8f9fa' : '#4d4d4d'
 
 export const positiveChartOptions = {
   title: '検査陽性者数',
@@ -80,7 +80,7 @@ export const testedChartOptions = {
   },
 }
 
-export const vaccinationChartOptions = {
+export const vaccinationTotalChartOptions = {
   title: 'ワクチン接種数累計',
   titleTextStyle: {
     color: textColor,
@@ -103,6 +103,41 @@ export const vaccinationChartOptions = {
   vAxes: {
     0: {
       title: 'ワクチン接種数累計',
+      minValue: 0,
+      titleTextStyle: {
+        color: textColor,
+      },
+      textColor: textColor,
+    },
+  },
+  hAxis: {
+    textColor: textColor,
+  },
+}
+
+export const vaccinationTimeChartOptions = {
+  title: '回数別ワクチン接種数合計',
+  titleTextStyle: {
+    color: textColor,
+  },
+  explorer: {
+    axis: 'horizontal',
+    keepInBounds: true,
+    actions: ['dragToPan'],
+  },
+  colors: chartColors,
+  backgroundColor: backgroundColor,
+  legend: {
+    textStyle: {
+      color: textColor,
+    },
+  },
+  series: {
+    0: { targetAxisIndex: 0, type: 'bars' },
+  },
+  vAxes: {
+    0: {
+      title: '回数別ワクチン接種数合計',
       minValue: 0,
       titleTextStyle: {
         color: textColor,

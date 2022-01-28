@@ -5,3 +5,15 @@
 @import '_footer.scss';
 @import '_layout.scss';
 @import '_tag.scss';
+
+body {
+  color: #4d4d4d;
+  background-color: #f8f9fa;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #f8f9fa;
+    background-color: #303030;
+  }
+}

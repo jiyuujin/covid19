@@ -4,7 +4,8 @@
   border-left-style: solid;
   margin: 1rem 0;
   width: 580px;
-  background-color: #f3f5f7;
+  color: #4d4d4d;
+  background-color: #fefefe;
 }
 
 .alert-block_warning {
@@ -17,10 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   .alert-block {
-    background-color: #626262;
-
-    a {
-      //color: #718096;
-    }
+    color: #f8f9fa;
+    background-color: #4d4d4d;
   }
 }

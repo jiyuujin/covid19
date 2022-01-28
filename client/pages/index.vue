@@ -1,223 +1,169 @@
 <template>
-  <main>
-    <div v-if="updatedAt" class="header">
-      {{ `${updatedAt} 更新` }}
-    </div>
-
-    <h1>新型コロナウイルス 現況</h1>
-    <h2>参照</h2>
-    <h3>
-      <a
-        href="https://www.mhlw.go.jp/stf/covid-19/open-data.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        新型コロナウイルス感染症について オープンデータ (厚生労働省)
-      </a>
-    </h3>
-    <h3>
-      <a
-        href="https://www.kantei.go.jp/jp/headline/kansensho/vaccine.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        これまでのワクチン総接種回数 (首相官邸)
-      </a>
-    </h3>
-
-    <div class="alert-block alert-block_error">
-      <p>緊急事態宣言</p>
-      <span v-for="p in emergencyDeclarationData" :key="p">
-        <span class="tag" :style="{ marginLeft: '8px' }">
-          {{ p }}
-        </span>
-      </span>
-      <span v-if="emergencyDeclarationData.length === 0">
-        {{ `発出されている都道府県はありません` }}
-      </span>
-    </div>
-
-    <div class="alert-block alert-block_warning">
-      <p>まん延防止等重点措置</p>
-      <span v-for="p in preventionDeclarationData" :key="p">
-        <span class="tag" :style="{ marginLeft: '8px' }">
-          {{ p }}
-        </span>
-      </span>
-      <span v-if="preventionDeclarationData.length === 0">
-        {{ `発出されている都道府県はありません` }}
-      </span>
-    </div>
-
-    <h2>データ</h2>
-    <h3 class="subtitle">
-      {{ `都道府県` }}
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `New API` }}
-      </span>
-    </h3>
-    <prefecture-select
-      :options="prefectures"
-      :values="prefecture"
-      @handle-select="handleSelect"
-    />
-    <h3 id="positiveTotal" class="subtitle">
-      <a href="/#positiveTotal">{{ `検査陽性者数` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `New API` }}
-      </span>
-    </h3>
-    <div class="grid">
-      <div class="grid_list">
-        <div v-if="positiveTotalData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="positiveTotalData"
-            :chart-options="positiveChartOptions"
-            class="chart"
-          />
+  <div>
+    <div class="g-header">
+      <div class="header-left">
+        <h1>新型コロナウイルス 現況</h1>
+        <h2>参照</h2>
+        <h3>
+          <a
+            href="https://www.mhlw.go.jp/stf/covid-19/open-data.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            新型コロナウイルス感染症について オープンデータ (厚生労働省)
+          </a>
+        </h3>
+        <h3>
+          <a
+            href="https://www.kantei.go.jp/jp/headline/kansensho/vaccine.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            これまでのワクチン総接種回数 (首相官邸)
+          </a>
+        </h3>
+        <div v-if="emergencyDeclarationData.length !== 0" class="alert-block alert-block_error">
+          <p>緊急事態宣言</p>
+          <span v-for="p in emergencyDeclarationData" :key="p">
+            <span class="tag" :style="{ marginLeft: '8px' }">
+              {{ p }}
+            </span>
+          </span>
         </div>
-        <loading-svg v-else class="loading" />
+
+        <div v-if="preventionDeclarationData.length !== 0" class="alert-block alert-block_warning">
+          <p>まん延防止等重点措置</p>
+          <span v-for="p in preventionDeclarationData" :key="p">
+            <span class="tag" :style="{ marginLeft: '8px' }">
+              {{ p }}
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="header-right">
+        <span v-if="updatedAt">{{ updatedAt }}</span>
+        {{ `更新` }}
+        <prefecture-select
+          :options="prefectures"
+          :values="prefecture"
+          @handle-select="handleSelect"
+        />
       </div>
     </div>
 
-    <h3 id="testedTotal" class="subtitle">
-      <a href="/#testedTotal">{{ `検査実施件数` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `API V1` }}
-      </span>
-    </h3>
-    <div class="grid">
-      <div class="grid_list">
-        <div v-if="testedTotalData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="testedTotalData"
-            :chart-options="testedChartOptions"
-            class="chart"
-          />
+    <div class="g-grid">
+      <div id="positiveTotal" class="grid">
+        <div class="grid_list">
+          <div v-if="positiveTotalData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="positiveTotalData"
+              :chart-options="positiveChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
         </div>
-        <loading-svg v-else class="loading" />
+      </div>
+      <div id="testedTotal" class="grid">
+        <div class="grid_list">
+          <div v-if="testedTotalData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="testedTotalData"
+              :chart-options="testedChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
+        </div>
       </div>
     </div>
-
-    <h3 id="vaccinationTotal" class="subtitle">
-      <a href="/#vaccinationTotal">{{ `ワクチン接種数累計` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `API V1` }}
-      </span>
-    </h3>
-    <div class="grid">
-      <div class="grid_list">
-        <div v-if="vaccinationTotalData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="vaccinationTotalData"
-            :chart-options="vaccinationChartOptions"
-            class="chart"
-          />
+    <div class="g-grid">
+      <div id="severeTotal" class="grid">
+        <div class="grid_list">
+          <div v-if="severeTotalData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="severeTotalData"
+              :chart-options="severeChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
         </div>
-        <loading-svg v-else class="loading" />
+      </div>
+      <div id="recoveryTotal" class="grid">
+        <div class="grid_list">
+          <div v-if="recoveryTotalData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="recoveryTotalData"
+              :chart-options="recoveryChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
+        </div>
       </div>
     </div>
-
-    <h4 id="vaccinationDate" class="subtitle">
-      {{ `回数別` }}
-    </h4>
-    <div v-if="prefecture === 0" class="grid">
-      <div class="grid_list">
-        <div v-if="vaccinationDateData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="vaccinationDateData"
-            :chart-options="vaccinationChartOptions"
-            class="chart"
-          />
+    <div class="g-grid">
+      <div id="caseTotal" class="grid">
+        <div class="grid_list">
+          <div v-if="caseTotalData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="caseTotalData"
+              :chart-options="caseChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
         </div>
-        <loading-svg v-else class="loading" />
+      </div>
+      <div id="deathTotal" class="grid">
+        <div class="grid_list">
+          <div v-if="deathTotalData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="deathTotalData"
+              :chart-options="deathChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
+        </div>
       </div>
     </div>
-
-    <h3 id="recoveryTotal" class="subtitle">
-      <a href="/#recoveryTotal">{{ `退院、療養解除となった者` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `New API` }}
-      </span>
-    </h3>
-    <div class="grid">
-      <div class="grid_list">
-        <div v-if="recoveryTotalData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="recoveryTotalData"
-            :chart-options="recoveryChartOptions"
-            class="chart"
-          />
+    <div class="g-grid">
+      <div id="vaccinationTotal" class="grid">
+        <div class="grid_list">
+          <div v-if="vaccinationTotalData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="vaccinationTotalData"
+              :chart-options="vaccinationTotalChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
         </div>
-        <loading-svg v-else class="loading" />
+      </div>
+      <div class="grid">
+        <div class="grid_list">
+          <div v-if="vaccinationDateData.length !== 0" class="info">
+            <google-chart
+              chart-type="ColumnChart"
+              :chart-data="vaccinationDateData"
+              :chart-options="vaccinationTimeChartOptions"
+              class="chart"
+            />
+          </div>
+          <loading-svg v-else class="loading" />
+        </div>
       </div>
     </div>
-
-    <h3 id="caseTotal" class="subtitle">
-      <a href="/#caseTotal">{{ `入院治療を要する者` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `New API` }}
-      </span>
-    </h3>
-    <div class="grid">
-      <div class="grid_list">
-        <div v-if="caseTotalData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="caseTotalData"
-            :chart-options="caseChartOptions"
-            class="chart"
-          />
-        </div>
-        <loading-svg v-else class="loading" />
-      </div>
-    </div>
-
-    <h3 id="deathTotal" class="subtitle">
-      <a href="/#deathTotal">{{ `死亡者数` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `New API` }}
-      </span>
-    </h3>
-    <div class="grid">
-      <div class="grid_list">
-        <div v-if="deathTotalData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="deathTotalData"
-            :chart-options="deathChartOptions"
-            class="chart"
-          />
-        </div>
-        <loading-svg v-else class="loading" />
-      </div>
-    </div>
-
-    <h3 id="severeTotal" class="subtitle">
-      <a href="/#severeTotal">{{ `重症者数` }}</a>
-      <span class="tag" :style="{ marginLeft: '8px' }">
-        {{ `New API` }}
-      </span>
-    </h3>
-    <div class="grid">
-      <div class="grid_list">
-        <div v-if="severeTotalData.length !== 0" class="info">
-          <google-chart
-            chart-type="ColumnChart"
-            :chart-data="severeTotalData"
-            :chart-options="severeChartOptions"
-            class="chart"
-          />
-        </div>
-        <loading-svg v-else class="loading" />
-      </div>
-    </div>
-  </main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -226,7 +172,8 @@ import { defineComponent, ref, computed, watch, useContext, onMounted } from '@n
 import {
   positiveChartOptions,
   testedChartOptions,
-  vaccinationChartOptions,
+  vaccinationTotalChartOptions,
+  vaccinationTimeChartOptions,
   caseChartOptions,
   recoveryChartOptions,
   deathChartOptions,
@@ -353,7 +300,8 @@ export default defineComponent({
     return {
       positiveChartOptions,
       testedChartOptions,
-      vaccinationChartOptions,
+      vaccinationTotalChartOptions,
+      vaccinationTimeChartOptions,
       caseChartOptions,
       recoveryChartOptions,
       deathChartOptions,
