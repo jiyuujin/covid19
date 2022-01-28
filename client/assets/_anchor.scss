@@ -5,11 +5,11 @@
   vertical-align: middle;
 
   a {
-    color: #000;
+    color: #4d4d4d;
     text-decoration: none;
 
     &:visited {
-      color: #000;
+      color: #4d4d4d;
     }
   }
 }
@@ -17,10 +17,10 @@
 @media (prefers-color-scheme: dark) {
   .subtitle {
     a {
-      color: #fff;
+      color: #f8f9fa;
 
       &:visited {
-        color: #fff;
+        color: #f8f9fa;
       }
     }
   }
