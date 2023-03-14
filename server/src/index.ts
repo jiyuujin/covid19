@@ -53,24 +53,11 @@ global.fetchSevereTotalDailyV2 = (): void => {
   Covid19Service.fetchSevereTotalDailyV2()
 }
 
-global.fetchVaccinationDateSummaryDaily = (): void => {
-  Covid19Service.fetchVaccinationDateSummaryDaily()
-}
-
-global.fetchVaccinationPrefectureSummaryDaily = (): void => {
-  Covid19Service.fetchVaccinationPrefectureSummaryDaily()
-}
-
 global.doGet = (e): any => {
   const now = new Date()
 
   const v1data = CollectionService.getData(SHEET_ID, 'v1_main')
   const declarationData = CollectionService.getData(SHEET_ID, 'declaration_main')
-  const vaccinationDateData = CollectionService.getData(SHEET_ID, 'vaccination_date_main')
-  const vaccinationPrefectureData = CollectionService.getData(
-    SHEET_ID,
-    'vaccination_prefecture_main',
-  )
   const v2PositiveData = CollectionService.getData(SHEET_ID, 'v2_positive_main')
   const v2CaseData = CollectionService.getData(SHEET_ID, 'v2_case_main')
   const v2DeathData = CollectionService.getData(SHEET_ID, 'v2_death_main')
@@ -88,8 +75,6 @@ global.doGet = (e): any => {
         //data: data,
         v1data: v1data,
         declarationData: declarationData,
-        vaccinationDateData: vaccinationDateData,
-        vaccinationPrefectureData: vaccinationPrefectureData,
         v2PositiveData: v2PositiveData,
         v2CaseData: v2CaseData,
         v2DeathData: v2DeathData,
@@ -107,8 +92,6 @@ global.doGet = (e): any => {
         //data: data,
         v1data: v1data,
         declarationData: declarationData,
-        vaccinationDateData: vaccinationDateData,
-        vaccinationPrefectureData: vaccinationPrefectureData,
         v2PositiveData: v2PositiveData,
         v2CaseData: v2CaseData,
         v2DeathData: v2DeathData,

@@ -8,7 +8,6 @@ Scraping was done focusing on the following indicators
 
 - Number of positive patients
 - Number of tested patients
-- Cumulative number of vaccinations
 - Those who have been recovered or canceled medical treatment
 - Number of case for medical treatment
 - Number of deaths

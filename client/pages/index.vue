@@ -13,15 +13,6 @@
             新型コロナウイルス感染症について オープンデータ (厚生労働省)
           </a>
         </h3>
-        <h3>
-          <a
-            href="https://www.kantei.go.jp/jp/headline/kansensho/vaccine.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            これまでのワクチン総接種回数 (首相官邸)
-          </a>
-        </h3>
         <div v-if="emergencyDeclarationData.length !== 0" class="alert-block alert-block_error">
           <p>緊急事態宣言</p>
           <span v-for="p in emergencyDeclarationData" :key="p">
@@ -135,34 +126,6 @@
         </div>
       </div>
     </div>
-    <div class="g-grid">
-      <div id="vaccinationTotal" class="grid">
-        <div class="grid_list">
-          <div v-if="vaccinationTotalData.length !== 0" class="info">
-            <google-chart
-              chart-type="ColumnChart"
-              :chart-data="vaccinationTotalData"
-              :chart-options="vaccinationTotalChartOptions"
-              class="chart"
-            />
-          </div>
-          <loading-svg v-else class="loading" />
-        </div>
-      </div>
-      <div class="grid">
-        <div class="grid_list">
-          <div v-if="vaccinationDateData.length !== 0" class="info">
-            <google-chart
-              chart-type="ColumnChart"
-              :chart-data="vaccinationDateData"
-              :chart-options="vaccinationTimeChartOptions"
-              class="chart"
-            />
-          </div>
-          <loading-svg v-else class="loading" />
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -172,8 +135,6 @@ import { defineComponent, ref, computed, watch, useContext, onMounted } from '@n
 import {
   positiveChartOptions,
   testedChartOptions,
-  vaccinationTotalChartOptions,
-  vaccinationTimeChartOptions,
   caseChartOptions,
   recoveryChartOptions,
   deathChartOptions,
@@ -182,8 +143,6 @@ import {
 import {
   positiveChartColumns,
   testedChartColumns,
-  vaccinationTotalChartColumns,
-  vaccinationDateChartColumns,
   caseChartColumns,
   recoveryChartColumns,
   deathChartColumns,
@@ -193,9 +152,6 @@ import {
   getEmergencyDeclarationItems,
   getPreventionDeclarationItems,
   getV1Items,
-  getVaccinationTotalItems,
-  getVaccinationDateItems,
-  getVaccinationPrefectureItems,
   getPositiveV2Items,
   getCaseV2Items,
   getDeathV2Items,
@@ -222,9 +178,6 @@ export default defineComponent({
     const preventionDeclarationData = ref<IData>([])
     const positiveTotalData = ref<IData>([])
     const testedTotalData = ref<IData>([])
-    const vaccinationTotalData = ref<IData>([])
-    const vaccinationDateData = ref<IData>([])
-    const vaccinationPrefectureData = ref<IData>([])
     const caseTotalData = ref<IData>([])
     const recoveryTotalData = ref<IData>([])
     const deathTotalData = ref<IData>([])
@@ -242,9 +195,6 @@ export default defineComponent({
       preventionDeclarationData.value = []
       positiveTotalData.value = []
       testedTotalData.value = []
-      vaccinationTotalData.value = []
-      vaccinationDateData.value = []
-      vaccinationPrefectureData.value = []
       caseTotalData.value = []
       recoveryTotalData.value = []
       deathTotalData.value = []
@@ -262,15 +212,6 @@ export default defineComponent({
             ...getPositiveV2Items(res, positiveChartColumns, prefectureText)
           ]
           testedTotalData.value = [...getV1Items(res, testedChartColumns)]
-          vaccinationTotalData.value = [
-            ...getVaccinationTotalItems(res, vaccinationTotalChartColumns)
-          ]
-          vaccinationDateData.value = [
-            ...getVaccinationDateItems(res, vaccinationDateChartColumns)
-          ]
-          vaccinationPrefectureData.value = [
-            ...getVaccinationPrefectureItems(res, vaccinationDateChartColumns)
-          ]
           caseTotalData.value = [...getCaseV2Items(res, caseChartColumns, true, prefectureText)]
           recoveryTotalData.value = [
             ...getCaseV2Items(res, recoveryChartColumns, false, prefectureText)
@@ -300,8 +241,6 @@ export default defineComponent({
     return {
       positiveChartOptions,
       testedChartOptions,
-      vaccinationTotalChartOptions,
-      vaccinationTimeChartOptions,
       caseChartOptions,
       recoveryChartOptions,
       deathChartOptions,
@@ -313,9 +252,6 @@ export default defineComponent({
       preventionDeclarationData,
       positiveTotalData,
       testedTotalData,
-      vaccinationTotalData,
-      vaccinationDateData,
-      vaccinationPrefectureData,
       caseTotalData,
       recoveryTotalData,
       deathTotalData,
